@@ -3,11 +3,11 @@ name: Sound sources and musical roles
 description: User corrections about Dust and the roles of orchestral recordings and tape loops in Velouria.
 ---
 
-Treat SoundMorph Dust as a standalone instrument providing its own background texture, not an audio effect processing another recording or instrument’s notes.
+In the Environment module, describe SoundMorph Dust as a standalone instrument providing its own background texture, not an audio effect processing another recording or instrument’s notes.
 
 **Why:** The user corrected an inaccurate phrase-ending processing recommendation and requested Dust separately as an Environment layer.
 
-**How to apply:** Keep the distinction between independent sound sources and audio processors explicit whenever offering production advice.
+**How to apply:** Keep this distinction in Environment guidance. Do not add Dust as a contrast or aside in Phrase Effects.
 
 When describing phrase effects, frame them as experiments to find the right feeling for the piece, not as a process limited to phrase endings. An ending treatment is one possible technique; other parts or whole phrases may also use effects.
 
