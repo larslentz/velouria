@@ -31,6 +31,9 @@ st.set_page_config(
 hero_image_url = "data:image/webp;base64," + b64encode(
     (Path(__file__).parent / "assets" / "velouria-hero.webp").read_bytes()
 ).decode("ascii")
+definition_image_url = "data:image/webp;base64," + b64encode(
+    (Path(__file__).parent / "assets" / "velouria-definition.webp").read_bytes()
+).decode("ascii")
 
 st.markdown(
     """
@@ -78,6 +81,24 @@ st.markdown(
       .dictionary-meta { display:grid; grid-template-columns:1.4fr 1fr; gap:16px; border-top:1px solid var(--velour-line); padding-top:16px; }
       .dictionary-meta p { font-size:.88rem; margin:.35rem 0; color:#aeb8c1; }
       .dict-label { color:#d8c18e; font-family:'Space Mono',monospace; font-size:.65rem; text-transform:uppercase; letter-spacing:.13em; }
+      [data-testid="stExpander"] details[open],
+      details[data-testid="stExpander"][open] {
+        overflow:hidden;
+        border:1px solid rgba(213,184,117,.34);
+        border-radius:18px;
+        background:
+          linear-gradient(90deg, rgba(8,13,18,.86) 0%, rgba(8,13,18,.78) 54%, rgba(8,13,18,.70) 100%),
+          linear-gradient(0deg, rgba(8,13,18,.60) 0%, rgba(8,13,18,.25) 48%, rgba(8,13,18,.42) 100%),
+          url("__VELOURIA_DEFINITION_IMAGE__") center 52% / cover no-repeat;
+      }
+      [data-testid="stExpander"] details[open] > div,
+      details[data-testid="stExpander"][open] > div {
+        background:transparent !important;
+      }
+      [data-testid="stExpander"] details[open] summary,
+      details[data-testid="stExpander"][open] summary {
+        background:transparent !important;
+      }
       .form-chip { display:inline-block; border:1px solid rgba(213,184,117,.27); border-radius:100px; padding:5px 10px; margin:7px 5px 0 0; color:#ded2b6; font-size:.78rem; }
       .section-heading { font-size:1.65rem; margin:.25rem 0 .35rem; }
       .section-lede { max-width:790px; color:#aab5bf; margin-bottom:1.25rem; }
@@ -119,12 +140,21 @@ st.markdown(
             linear-gradient(0deg, rgba(8,13,18,.72), rgba(8,13,18,.20)),
             url("__VELOURIA_HERO_IMAGE__") center 58% / cover no-repeat;
         }
+        [data-testid="stExpander"] details[open],
+        details[data-testid="stExpander"][open] {
+          background:
+            linear-gradient(90deg, rgba(8,13,18,.88), rgba(8,13,18,.76)),
+            linear-gradient(0deg, rgba(8,13,18,.65), rgba(8,13,18,.34)),
+            url("__VELOURIA_DEFINITION_IMAGE__") center 46% / cover no-repeat;
+        }
         .dictionary-meta { grid-template-columns:1fr; }
         .hero-top { display:block; }
         .chord-step { min-width:44%; }
       }
     </style>
-    """.replace("__VELOURIA_HERO_IMAGE__", hero_image_url),
+    """
+    .replace("__VELOURIA_HERO_IMAGE__", hero_image_url)
+    .replace("__VELOURIA_DEFINITION_IMAGE__", definition_image_url),
     unsafe_allow_html=True,
 )
 
