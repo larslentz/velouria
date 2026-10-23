@@ -12,3 +12,5 @@ The guide must explain things to beginners without much music knowledge. Introdu
 Explain how modules fit together: distinguish standalone practice exercises from accompaniment and melody layers, and give explicit entry, repetition, rest, and ending instructions.
 
 **Why:** The user found it unclear whether Foundation repeats throughout the piece or when Sincere Fragment begins.
+
+**How to apply:** Name the source modules and specific examples whenever referring to a combined pattern. Define phrases such as “accompaniment-and-melody loop” where they appear instead of assuming the reader will connect them to earlier instructions.
