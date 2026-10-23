@@ -1,0 +1,1 @@
+- [Preview routing checks](preview-routing.md) — a healthy standalone server can still be unreachable through an application-router preview.

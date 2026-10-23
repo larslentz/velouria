@@ -5,7 +5,7 @@ A Streamlit reference guide for composing Velouria-style ambient and chamber-ins
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `streamlit run app.py --server.port 5000 --server.address 0.0.0.0` — run the Velouria guide
+- Start the managed `artifacts/velouria-guide: web` workflow to run the Streamlit guide with its registered preview route and assigned port.
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -31,6 +31,7 @@ A Streamlit reference guide for composing Velouria-style ambient and chamber-ins
 
 - The app is an instructional guide only; it does not generate or export audio or MIDI.
 - Piano rolls and staff examples are SVGs generated from the same pitch data used by the transposition selector.
+- The web artifact hosts the existing Python/Streamlit interface, not the unused React scaffold. Its service definition owns preview routing, including the Streamlit WebSocket.
 
 ## Product
 
