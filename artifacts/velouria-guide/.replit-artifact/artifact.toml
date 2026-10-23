@@ -1,27 +1,27 @@
 kind = "web"
 previewPath = "/"
 title = "Velouria: The Compositional Guide"
-description = "Python and Streamlit composition handbook with transposable harmony, notation, piano rolls, sound design, and environmental layering."
+description = "A browser-based composition guide with transposable harmony, notation, piano rolls, sound design, and environmental layering."
 version = "1.0.0"
 id = "artifacts/velouria-guide"
 router = "path"
 
 [[services]]
 name = "web"
-paths = ["/", "/_stcore/stream"]
+paths = ["/"]
 localPort = 23082
 
 [services.development]
-run = "cd ../.. && exec streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true"
+run = "pnpm --filter @workspace/velouria-guide run dev"
 
 [services.production.build]
-args = ["uv", "sync", "--frozen"]
+args = ["sh", "-c", "pnpm --filter @workspace/velouria-guide run build"]
 
 [services.production.run]
-args = ["sh", "-c", "cd ../.. && exec uv run --no-sync streamlit run app.py --server.port \"$PORT\" --server.address 0.0.0.0 --server.headless true"]
+args = ["sh", "-c", "pnpm --filter @workspace/velouria-guide run serve"]
 
 [services.production.health.startup]
-path = "/_stcore/health"
+path = "/"
 
 [services.env]
 PORT = "23082"
