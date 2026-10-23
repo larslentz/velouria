@@ -1,5 +1,10 @@
+import "./VelvetScore.css";
 import { OrnamentGuide } from "./OrnamentGuide";
 
 export function VelvetScore() {
-  return <OrnamentGuide ornament="staff" />;
+  return (
+    <div className="vs-ambient-tape">
+      <OrnamentGuide ornament="staff" />
+    </div>
+  );
 }
