@@ -33,6 +33,12 @@ export function EnvironmentTextures() {
         <p>Keep a strongly melodic or rhythmically busy recording lower, edit it more sparsely, or use it as the main phrase instead of letting two melodies compete.</p>
       </article>
     </div>
+    <section className="learning-note" aria-labelledby="synth-tape-loop-title" data-testid="environment-synth-over-tape-loop">
+      <h3 id="synth-tape-loop-title">Layer a synth loop over a recording</h3>
+      <p>Background layering can combine two repeating parts, not just a single texture. For example, I have used a Voyetra synth to play a looped sequence of notes over a looped recording of an orchestra or another source. Keep them on separate tracks so you can balance each one, then let the blend sit quietly behind the foreground music.</p>
+      <p>This looping-and-layering approach is very similar to what William Basinski used for <em>The Disintegration Loops</em>.</p>
+      <p>Try different note sequences and loop lengths. Fade the parts in gently, smooth any abrupt joins with short crossfades, and adjust their levels until their motion adds atmosphere without covering the chords or melody.</p>
+    </section>
     <section className="learning-note" aria-labelledby="recording-roles-title" data-testid="environment-recording-roles">
       <h3 id="recording-roles-title">The same kind of recording can be the music itself</h3>
       <p><strong>Texture is a role, not a rule about the source.</strong> An orchestral or tape-loop recording does not have to stay in the background. Decide what you want it to do:</p>
