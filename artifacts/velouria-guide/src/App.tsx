@@ -83,10 +83,19 @@ function App() {
       <aside className="note" aria-label="Companion app: Beautiful Unease" data-testid="beautiful-unease-reference">
         <strong>Companion app: <a href="https://larslentz.github.io/beautiful_unease/" target="_blank" rel="noopener noreferrer">Beautiful Unease</a>.</strong> It creates melodies and harmonies that you can use as starting material for Velouria-type music. A melody is a sequence of notes; harmony is the supporting notes played together. Try using a short passage from a Beautiful Unease melody as your Sincere Fragment, or its harmonies as an alternative to Foundation’s example chords. Keep the melody and backing in the same key, leave space between phrases, then explore Transformations, Sound Design, and Environment to shape the piece.
       </aside>
-      <div className="tabs" role="tablist" aria-label="Composition learning modules" data-testid="module-tabs">
-        {tabs.map((name, i) => <button type="button" role="tab" id={`tab-${i}`} aria-controls={`panel-${i}`} aria-selected={tab === i} className="tab-button" key={name} onClick={() => setTab(i)} data-testid={`tab-module-${i + 1}`}>
-          <span className="tab-num">0{i + 1}</span>{name}
-        </button>)}
+      <div className="module-navigation">
+        <div className="module-navigation-track">
+          <div className="module-family-row">
+            <p className="module-family" id="beautiful-unease-modules" data-testid="beautiful-unease-module-group">
+              Beautiful Unease<span className="sr-only"> includes Foundation, Sincere Fragment, and Transformations.</span>
+            </p>
+          </div>
+          <div className="tabs" role="tablist" aria-label="Composition learning modules" data-testid="module-tabs">
+            {tabs.map((name, i) => <button type="button" role="tab" id={`tab-${i}`} aria-controls={`panel-${i}`} aria-describedby={i < 3 ? 'beautiful-unease-modules' : undefined} aria-selected={tab === i} className="tab-button" key={name} onClick={() => setTab(i)} data-testid={`tab-module-${i + 1}`}>
+              <span className="tab-num">0{i + 1}</span>{name}
+            </button>)}
+          </div>
+        </div>
       </div>
       <section className="tab-content" role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} key={`${tab}-${key}`} data-testid={`content-module-${tab + 1}`}>
         {tab === 0 && <>
