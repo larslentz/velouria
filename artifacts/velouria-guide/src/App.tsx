@@ -43,7 +43,7 @@ function App() {
         </div>
         <div className="dict-label">THE COMPOSITIONAL GUIDE</div>
       </div>
-      <p className="hero-definition">A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space.</p>
+      <p className="hero-definition">A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space, often evoking a feeling described as "beautiful unease."</p>
       <div className="dictionary-meta">
         <div><div className="dict-label">ETYMOLOGY</div><p>Coined from <em>velour</em> (a plush, soft-woven fabric) and <em>aetheria / -ia</em> (suggesting an atmospheric or dreamlike realm).</p></div>
         <div><div className="dict-label">RELATED FORMS</div><p><b>Velouric</b> (adj.): Exhibiting subtle qualities, traces, or underlying textures characteristic of Velouria.</p><p><b>Velourian</b> (adj./n.): Directly embodying the aesthetic and compositional principles of Velouria.</p></div>
@@ -56,7 +56,7 @@ function App() {
       </button>
       {definitionOpen && <article id="definition-panel" className="definition-panel" style={{ backgroundImage: `linear-gradient(90deg,rgba(12,16,20,.94),rgba(12,16,20,.74)),url("${definitionImage}")` }} data-testid="panel-full-definition">
         <h2>Velouria</h2><p><strong><em>Ve·lou·ri·a</em> /vəˈlʊər.i.ə/ · noun</strong></p>
-        <h3>Definition</h3><p>A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space.</p>
+        <h3>Definition</h3><p>A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space, often evoking a feeling described as "beautiful unease."</p>
         <h3>Etymology</h3><p>Coined from <em>velour</em> (a plush, soft-woven fabric) and <em>aetheria / -ia</em> (suggesting an atmospheric or dreamlike realm).</p>
         <h3>Inflections &amp; Related Forms</h3>
         <ul><li><strong>Velouric</strong> /vəˈlʊər.ɪk/ <em>adjective</em>: Exhibiting subtle qualities, traces, or underlying textures characteristic of Velouria (e.g., <em>a Velouric undertone in a downtempo track</em>).</li>
