@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  KEYS, VARIATIONS, dyadPairs, dyadSighEvents, expandedProgression,
+  KEYS, VARIATIONS, arrangementPlan, dyadPairs, dyadSighEvents, expandedProgression,
   keyRootMidi, melodyEvents, pianoRollLayout, pianoRollSvg, pitchName, variationEvents,
 } from '../src/music.ts';
 
@@ -90,5 +90,31 @@ test('ghost entrance and late breath have their stated one-beat and half-beat of
   for (const key of KEYS) {
     assert.equal(variationEvents(key, 'ghost')[0].start, 1);
     assert.equal(variationEvents(key, 'late')[0].start, .5);
+  }
+});
+
+test('the playing plan starts chords only in bars one, three, five, seven and eight in every key', () => {
+  for (const key of KEYS) {
+    const plan = arrangementPlan(key);
+    assert.deepEqual(plan.map(row => row.bar), [1, 2, 3, 4, 5, 6, 7, 8]);
+    assert.deepEqual(plan.filter(row => row.strikeChord).map(row => row.bar), [1, 3, 5, 7, 8]);
+    assert.deepEqual(plan.map(row => row.chord.label),
+      ['i(add9)', 'i(add9)', '♭VImaj7', '♭VImaj7', '♭IImaj7', '♭IImaj7', 'ivm9', 'V7sus4']);
+    for (const row of plan) {
+      const start = (row.bar - 1) * 4;
+      assert.ok(row.chord.start <= start && row.chord.start + row.chord.duration >= start + 4);
+    }
+  }
+});
+
+test('the playing plan keeps accompaniment active during melody rests and matches every melody attack', () => {
+  for (const key of KEYS) {
+    const plan = arrangementPlan(key);
+    assert.deepEqual(plan.flatMap(row => row.melody), melodyEvents(key));
+    assert.deepEqual(plan.filter(row => row.melody.length).map(row => row.bar), [1, 2, 7, 8]);
+    for (const row of plan.slice(2, 6)) {
+      assert.equal(row.melody.length, 0);
+      assert.ok(row.chord.notes.length > 0);
+    }
   }
 });

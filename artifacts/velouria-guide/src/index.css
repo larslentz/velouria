@@ -108,6 +108,15 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .arrow { color:#a18f67; }
 .note { border-left:2px solid #b9a36e; background:rgba(194,170,112,.07); padding:14px 18px; color:#c6c2b5; font-size:13px; line-height:1.7; margin:18px 0 25px; }
 .note b { color:#e2d6b9; }
+.note a { color:var(--gold-bright); text-decoration:underline; text-underline-offset:3px; }
+.arrangement-guide { scroll-margin-top:24px; }
+.arrangement-guide h4 { color:#ead7a8; font-size:18px; font-weight:500; margin:26px 0 10px; }
+.arrangement-key-point { border-left:2px solid var(--gold); padding-left:16px; }
+.arrangement-table th:first-child { width:90px; }
+.arrangement-table td { width:44%; }
+.arrangement-table td p { margin:8px 0; }
+.arrangement-table ul { margin:0; padding-left:18px; }
+.arrangement-table li { margin:6px 0; }
 .variation-card { min-height:86px; }
 .variation-card strong { display:block; color:#e4d6b4; font-weight:500; margin-bottom:9px; }
 .variation-card span { color:#aeb7ba; line-height:1.5; display:block; font-size:13px; }

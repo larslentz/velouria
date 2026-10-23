@@ -4,6 +4,7 @@ import {
   mixMatrixSvg, pitchName, staffSvg, variationEvents,
 } from './music';
 import { PianoRoll } from './PianoRoll';
+import { ArrangementGuide } from './ArrangementGuide';
 
 const BASE = import.meta.env.BASE_URL;
 const heroImage = `${BASE}images/velouria-hero.webp`;
@@ -84,6 +85,7 @@ function App() {
       <section className="tab-content" role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} key={`${tab}-${key}`} data-testid={`content-module-${tab + 1}`}>
         {tab === 0 && <>
           <Heading number="01" title="Start with two notes">Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. This small downward movement makes the gentle “sigh” used throughout the guide. Two notes played together are called a dyad.</Heading>
+          <div className="note" data-testid="foundation-exercise-role"><strong>Start with this as a short practice exercise, not a pattern you must play throughout the piece.</strong> Repeat the two bars a few times by themselves. Later in this tab, the eight-bar chord sequence becomes your accompaniment, with the Sincere Fragment melody played above it. <a href="#arrangement-plan">See the complete playing order and bar-by-bar plan below.</a></div>
           <details className="learning-note" data-testid="foundation-interval-explanation">
             <summary>The music theory behind the sigh</summary>
             <p>Musicians call this movement a <strong>perfect fourth settling to a major third</strong>, sometimes shortened to <strong>P4 → M3</strong>. Here is what those names mean.</p>
@@ -114,7 +116,7 @@ function App() {
           </details>
           <PianoRoll events={dyadEvents} bars={2} title="Two gentle sighs · one in each bar" testId="diagram-dyad-piano-roll" />
           <h3>Next: turn the idea into an eight-bar chord sequence</h3>
-          <p className="beginner-intro">A <strong>chord</strong> is a group of notes played together. A <strong>progression</strong> is a sequence of chords. In the roll below, play each vertical stack together and hold it for the length of its blocks. The first three chords each last two bars; the final two each last one bar.</p>
+          <p className="beginner-intro">A <strong>chord</strong> is a group of notes played together. A <strong>progression</strong> is a sequence of chords. For the suggested arrangement, use this sequence <strong>instead of continuously repeating the two-bar sigh exercise</strong>. Play each vertical stack together and hold it for the length of its blocks. The first three chords each last two bars; the final two each last one bar.</p>
           <div className="chord-ribbon" aria-label="Eight-bar chord progression" data-testid="progression-chord-ribbon">
             {['i(add9)', '♭VImaj7', '♭IImaj7', 'ivm9 / V7sus4'].map((chord, i) => <div className="chord-step" key={chord}><strong>{chord}</strong><span>{['BARS 1–2', 'BARS 3–4', 'BARS 5–6', 'BARS 7–8'][i]}</span></div>).flatMap((el, i) => i < 3 ? [el, <span className="arrow" key={`arrow-${i}`} aria-hidden="true">→</span>] : [el])}
           </div>
@@ -131,10 +133,17 @@ function App() {
             <p>No need to work out those notes yourself: the piano roll and its note list show the exact keys to play.</p>
           </details>
           <PianoRoll events={progressionEvents} bars={8} title={`Eight-bar chord sequence · ${key} minor`} testId="diagram-eight-bar-progression" />
-          <div className="note" data-testid="note-progression-ending">In bar 7, play the notes of <b>ivm9</b> together. In bar 8, switch to <b>V7sus4</b>. Rather than returning to the home chord, stop on that open sound. This is one way to let an ending feel unfinished.</div>
+          <div className="note" data-testid="note-progression-ending">In bar 7, play the notes of <b>ivm9</b> together. In bar 8, switch to <b>V7sus4</b>. To continue, return to bar 1 after bar 8. To finish instead, stop on that open sound and let it fade; this can leave an unfinished feeling.</div>
+          <ArrangementGuide tonalKey={key} />
         </>}
         {tab === 1 && <>
           <Heading number="02" title="The sincere fragment">A melody is a sequence of single notes; a motif is a short, recognizable pattern within it. Start with just three notes, each a little lower than the last. Leave silence afterward instead of adding more notes.</Heading>
+          <div className="learning-note" data-testid="melody-accompaniment-guidance">
+            <h3>When does this melody come in?</h3>
+            <p><strong>Play it over Foundation’s eight-bar chord sequence, not after the chords stop.</strong> For a simple start, play the chords alone for eight bars. Then restart the chord sequence and begin this melody at the same instant: beat 1 of the new cycle (bar 9 of the piece).</p>
+            <p>The melody roll below starts its own count at <strong>bar 1</strong>. That bar lines up with bar 1 of the repeated chord sequence. Play the first phrase in bars 1–2, leave the melody silent in bars 3–6, and play its return in bars 7–8. <strong>The chords keep sounding through all eight bars, including the melody’s rests.</strong></p>
+            <p>At the end, repeat the whole eight-bar cycle to continue, or stop both parts and let them fade. Do not repeat just the first two melody bars over and over. Foundation’s playing plan lists what both parts do in every bar.</p>
+          </div>
           <div className="grid-three">
             {[
               ['01', 'The Longing', `Start on ${pitchName(root + 26)}. This is the “ninth” color: two semitone steps above the home note, played in a higher octave. Play it softly on beat 1 of bar 1.`],
@@ -143,10 +152,11 @@ function App() {
             ].map(([n, title, copy]) => <div className="surface" key={n} data-testid={`card-melody-step-${n}`}><span className="step-number">{n}</span><h3 style={{ display: 'inline' }}>{title}</h3><p>{copy}</p></div>)}
           </div>
           <PianoRoll events={melodyEvents(key)} bars={8} title={`Three-note melody and breathing room · ${key}`} restBars={[2, 3, 4, 5]} testId="diagram-sincere-fragment" />
-          <div className="note" data-testid="note-melody-rest"><b>Bars 3–6 are intentionally empty.</b> Play no new melody notes here. Let the previous notes fade and leave room for background sounds. The three-note melody returns in bars 7–8.</div>
+          <div className="note" data-testid="note-melody-rest"><b>Bars 3–6 are intentionally empty for the melody only.</b> Keep Foundation’s accompaniment going: hold the ♭VImaj7 chord through bars 3–4, then the ♭IImaj7 chord through bars 5–6. Play no new melody notes in those bars. The three-note melody returns in bars 7–8 while the accompaniment changes underneath it.</div>
         </>}
         {tab === 2 && <>
           <Heading number="03" title="Variations & transformations">A variation changes one part of an existing idea. Try moving the melody’s start time, playing it higher or lower, or holding a note longer. Choose an example below and compare its note list with the original three-note melody.</Heading>
+          <div className="note" data-testid="variation-arrangement-guidance">Try these after the basic accompaniment-and-melody loop feels comfortable. Choose <strong>one variation for a later eight-bar pass</strong>, rather than stacking all eight examples at once. The rolls show the changed notes; they are not eight new sections you must perform in order. Keep the accompaniment running beneath the melody; Drone Pedal also adds a quiet, held bass layer.</div>
           <div className="keyline"><label htmlFor="variation-choice">Choose a transformation to inspect</label><select className="variation-select" id="variation-choice" value={variation} onChange={e => setVariation(Number(e.target.value))} data-testid="select-transformation">{VARIATIONS.map((v, i) => <option value={i} key={v.kind}>{v.name}</option>)}</select></div>
           <div className="surface" data-testid="selected-transformation"><div className="kicker">{currentVariation.name}</div><h3>{currentVariation.summary}</h3><p>{currentVariation.detail}</p></div>
           <PianoRoll events={variationEvents(key, currentVariation.kind)} bars={8} title={`${currentVariation.name} · ${key} minor`} testId="diagram-selected-transformation" />
@@ -155,6 +165,7 @@ function App() {
         </>}
         {tab === 3 && <>
           <Heading number="04" title="Mediated distance & sound design">Sound design means shaping an instrument’s tone. Keep one clear piano sound close to the listener, then add softer, slower sounds behind it. “Mediated distance” means making those background sounds feel filtered or half-remembered, rather than simply louder or quieter.</Heading>
+          <div className="note">These are sound choices for the parts you are already playing, not a separate section that starts after the melody. Add quiet layers gradually once the chord-and-melody pattern is clear. Pads and fading effects can continue through the melody’s empty bars.</div>
           <div className="grid-two">
             <div className="surface" data-testid="recipe-piano"><div className="kicker">Piano layer</div><h3>Soft felt tone</h3><p>Choose a felt piano, muted grand, or a softened sampled instrument (for example, Pianoteq or a Kawai felt-style patch).</p><ul><li>Velocity: 40–60. Velocity is how firmly a MIDI note is played, on a 1–127 scale.</li><li>Choose a close microphone sound for intimate detail.</li><li>Use dark reverb: a soft room-like echo. Avoid a sharp, bright initial hit (the transient).</li></ul></div>
             <div className="surface" data-testid="recipe-strings"><div className="kicker">String / pad swell</div><h3>Slow arrival</h3><p>A pad is a soft, sustained background sound. Use slow strings or a warm synthesizer preset beneath the piano.</p><ul><li>Attack: 600–900 ms. Let the sound fade in over 0.6–0.9 seconds rather than start abruptly.</li><li>Use a low-pass filter to remove bright high frequencies. A 24 dB/octave setting makes that reduction fairly steep.</li><li>Add a little chorus or ensemble effect for gently moving, wider sound.</li></ul></div>

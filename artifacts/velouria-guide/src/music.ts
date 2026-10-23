@@ -39,6 +39,21 @@ export function melodyEvents(key: string): Event[] {
     { start: 28, duration: 3, pitch: r + 24, label: 'landing' },
   ];
 }
+export function arrangementPlan(key: string) {
+  const chords = expandedProgression(key);
+  const melody = melodyEvents(key);
+  return Array.from({ length: 8 }, (_, index) => {
+    const start = index * 4;
+    const chord = chords.find(item => start >= item.start && start < item.start + item.duration);
+    if (!chord) throw new Error(`Missing accompaniment for bar ${index + 1}`);
+    return {
+      bar: index + 1,
+      chord,
+      strikeChord: start === chord.start,
+      melody: melody.filter(note => note.start >= start && note.start < start + 4),
+    };
+  });
+}
 export const VARIATIONS = [
   { name: '01 · Ghost Note', summary: 'Leave beat 1 empty; begin the melody on beat 2.', detail: "Move each melody note one beat later. The first beat of the bar is often called the downbeat. Skipping it makes the phrase sound as though it arrives mid-thought.", kind: 'ghost' },
   { name: '02 · Octave Dream', summary: 'Play the same melody in a lower part of the keyboard.', detail: 'Move every melody note twelve adjacent piano keys to the left, counting both black and white keys. This is one octave: the note letters stay the same, but their number drops by one. Keep the timing unchanged and play softly.', kind: 'octave' },
