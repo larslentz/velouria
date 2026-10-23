@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from base64 import b64encode
 from pathlib import Path
 
 import streamlit as st
@@ -26,6 +27,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed",
 )
+
+hero_image_url = "data:image/webp;base64," + b64encode(
+    (Path(__file__).parent / "assets" / "velouria-hero.webp").read_bytes()
+).decode("ascii")
 
 st.markdown(
     """
@@ -59,7 +64,10 @@ st.markdown(
       .hero {
         border: 1px solid rgba(213,184,117,.3); border-radius: 22px;
         padding: 30px 34px 26px; margin: 14px 0 26px;
-        background: linear-gradient(120deg, rgba(213,184,117,.11), rgba(18,27,37,.95) 47%, rgba(30,45,62,.72));
+        background:
+          linear-gradient(90deg, rgba(8,13,18,.82) 0%, rgba(8,13,18,.66) 52%, rgba(8,13,18,.48) 100%),
+          linear-gradient(0deg, rgba(8,13,18,.70) 0%, rgba(8,13,18,.18) 48%, rgba(8,13,18,.30) 100%),
+          url("__VELOURIA_HERO_IMAGE__") center 75% / cover no-repeat;
         box-shadow: 0 24px 60px rgba(0,0,0,.16);
       }
       .hero-top { display:flex; justify-content:space-between; align-items:flex-start; gap:28px; }
@@ -104,13 +112,19 @@ st.markdown(
       .caption-mono { color:#8e9ba9; font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:.04em; }
       @media (max-width: 700px) {
         .block-container { padding:1.1rem 1rem 3rem; }
-        .hero { padding:22px 20px; }
+        .hero {
+          padding:22px 20px;
+          background:
+            linear-gradient(90deg, rgba(8,13,18,.80), rgba(8,13,18,.52)),
+            linear-gradient(0deg, rgba(8,13,18,.72), rgba(8,13,18,.20)),
+            url("__VELOURIA_HERO_IMAGE__") center 58% / cover no-repeat;
+        }
         .dictionary-meta { grid-template-columns:1fr; }
         .hero-top { display:block; }
         .chord-step { min-width:44%; }
       }
     </style>
-    """,
+    """.replace("__VELOURIA_HERO_IMAGE__", hero_image_url),
     unsafe_allow_html=True,
 )
 

@@ -1,0 +1,41 @@
+.tm-tape-memory .og-ornament {
+  display: none !important;
+}
+
+.tm-tape-memory .og-hero {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.tm-tape-memory .og-hero::before {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 58%;
+  border-radius: 0 22px 22px 0;
+  background:
+    linear-gradient(90deg, rgba(18, 27, 37, .98) 0%, rgba(18, 27, 37, .94) 32%, rgba(18, 27, 37, .76) 66%, rgba(18, 27, 37, .68) 100%),
+    linear-gradient(0deg, rgba(18, 27, 37, .92) 0%, rgba(18, 27, 37, .48) 56%, rgba(18, 27, 37, .24) 100%),
+    url("/__mockup/images/tape-memory-background.png") right 44% / cover no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
+.tm-tape-memory .og-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 700px) {
+  .tm-tape-memory .og-hero::before {
+    width: 100%;
+    border-radius: 0 22px 0 0;
+    background:
+      linear-gradient(90deg, rgba(18, 27, 37, .94), rgba(18, 27, 37, .55)),
+      linear-gradient(0deg, rgba(18, 27, 37, .86), rgba(18, 27, 37, .12)),
+      url("/__mockup/images/tape-memory-background.png") center 40% / cover no-repeat;
+    opacity: .72;
+  }
+}

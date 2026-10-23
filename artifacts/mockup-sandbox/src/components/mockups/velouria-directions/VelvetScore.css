@@ -13,12 +13,12 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 58%;
-  border-radius: 0 22px 22px 0;
+  left: 0;
+  border-radius: 22px;
   background:
-    linear-gradient(90deg, rgba(18, 27, 37, .98) 0%, rgba(18, 27, 37, .94) 32%, rgba(18, 27, 37, .76) 66%, rgba(18, 27, 37, .68) 100%),
-    linear-gradient(0deg, rgba(18, 27, 37, .92) 0%, rgba(18, 27, 37, .48) 56%, rgba(18, 27, 37, .24) 100%),
-    url("/__mockup/images/velvet-score-tape-background.png") right 44% / cover no-repeat;
+    linear-gradient(90deg, rgba(8, 13, 18, .82) 0%, rgba(8, 13, 18, .66) 52%, rgba(8, 13, 18, .48) 100%),
+    linear-gradient(0deg, rgba(8, 13, 18, .70) 0%, rgba(8, 13, 18, .18) 48%, rgba(8, 13, 18, .30) 100%),
+    url("/__mockup/images/velvet-score-attached-tape-background.png") center 75% / cover no-repeat;
   content: "";
   pointer-events: none;
 }
@@ -30,12 +30,10 @@
 
 @media (max-width: 700px) {
   .vs-ambient-tape .og-hero::before {
-    width: 100%;
-    border-radius: 0 22px 0 0;
+    border-radius: 22px;
     background:
-      linear-gradient(90deg, rgba(18, 27, 37, .94), rgba(18, 27, 37, .55)),
-      linear-gradient(0deg, rgba(18, 27, 37, .86), rgba(18, 27, 37, .12)),
-      url("/__mockup/images/velvet-score-tape-background.png") center 40% / cover no-repeat;
-    opacity: .72;
+      linear-gradient(90deg, rgba(8, 13, 18, .80), rgba(8, 13, 18, .52)),
+      linear-gradient(0deg, rgba(8, 13, 18, .72), rgba(8, 13, 18, .20)),
+      url("/__mockup/images/velvet-score-attached-tape-background.png") center 58% / cover no-repeat;
   }
 }
