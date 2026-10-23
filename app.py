@@ -150,7 +150,7 @@ def render_hero() -> None:
               <h1>Velouria</h1>
               <div class="pronunciation">Ve·lou·ri·a /vəˈlʊər.i.ə/ · noun</div>
             </div>
-            <div class="dict-label">THE COMPOSITIONAL GUIDE<br/>EDITION 01</div>
+            <div class="dict-label">THE COMPOSITIONAL GUIDE</div>
           </div>
           <p class="hero-definition">A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space.</p>
           <div class="dictionary-meta">
