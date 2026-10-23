@@ -1,3 +1,4 @@
 - [Preview routing checks](preview-routing.md) — a healthy standalone server can still be unreachable through an application-router preview.
 - [Decorative design scope](decorative-design.md) — Velouria ornament studies should retain the original fonts rather than redesign the typography.
 - [GitHub workflow pushes](github-workflow-pushes.md) — bypass Replit's OAuth URL rewrite when using a fine-grained token to push workflow files.
+- [Beginner teaching](beginner-teaching.md) — explain theory terms before using them and pair them with readable, practical musical examples.

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {
-  KEYS, VARIATIONS, dyadPairs, expandedProgression, keyRootMidi, melodyEvents,
-  mixMatrixSvg, pianoRollSvg, pitchName, staffSvg, variationEvents,
+  KEYS, VARIATIONS, dyadPairs, dyadSighEvents, expandedProgression, keyRootMidi, melodyEvents,
+  mixMatrixSvg, pitchName, staffSvg, variationEvents,
 } from './music';
+import { PianoRoll } from './PianoRoll';
 
 const BASE = import.meta.env.BASE_URL;
 const heroImage = `${BASE}images/velouria-hero.webp`;
@@ -24,10 +25,7 @@ function App() {
   const pairs = dyadPairs(key);
   const progressive = expandedProgression(key);
   const currentVariation = VARIATIONS[variation];
-  const dyadEvents = pairs.flatMap((pair, index) => [
-    ...pair.start.map(pitch => ({ start: index * 4, duration: 1.7, pitch, label: pair.label })),
-    ...pair.rest.map(pitch => ({ start: index * 4 + 2, duration: 1.7, pitch, label: 'semitone release' })),
-  ]);
+  const dyadEvents = dyadSighEvents(key);
   const progressionEvents = progressive.flatMap(chord => chord.notes.map(pitch => ({
     start: chord.start, duration: chord.duration, pitch, label: `${chord.label} · bars ${chord.bars}`,
   })));
@@ -71,12 +69,13 @@ function App() {
 
     <main className="guide-wrap">
       <div className="keyline">
-        <label htmlFor="tonal-center">Choose a tonal center</label>
-        <select id="tonal-center" className="key-select" value={key} onChange={event => setKey(event.target.value)} data-testid="select-tonal-center">
+        <label htmlFor="tonal-center">Choose a starting key</label>
+        <select id="tonal-center" className="key-select" value={key} onChange={event => setKey(event.target.value)} aria-describedby="key-help" data-testid="select-tonal-center">
           {KEYS.map(choice => <option key={choice} value={choice}>{choice}</option>)}
         </select>
-        <span className="caption-mono" data-testid="text-tonal-center">TONAL CENTER · {key} MINOR&nbsp; / &nbsp;ROOT VOICING · {pitchName(root)}</span>
+        <span className="caption-mono" data-testid="text-tonal-center">KEY · {key} MINOR&nbsp; / &nbsp;HOME NOTE · {pitchName(root)}</span>
       </div>
+      <p className="beginner-intro" id="key-help">The key sets which note the music treats as “home.” That home note is the <strong>tonal center</strong>. Changing this moves every example higher or lower while keeping its pattern. You can leave it on A♭ to start. The numbered modules are a suggested learning order; you do not need to read sheet music.</p>
       <div className="tabs" role="tablist" aria-label="Composition learning modules" data-testid="module-tabs">
         {tabs.map((name, i) => <button type="button" role="tab" id={`tab-${i}`} aria-controls={`panel-${i}`} aria-selected={tab === i} className="tab-button" key={name} onClick={() => setTab(i)} data-testid={`tab-module-${i + 1}`}>
           <span className="tab-num">0{i + 1}</span>{name}
@@ -84,51 +83,87 @@ function App() {
       </div>
       <section className="tab-content" role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} key={`${tab}-${key}`} data-testid={`content-module-${tab + 1}`}>
         {tab === 0 && <>
-          <Heading number="01" title="Harmonic movement & dyads">A held bass note gives the upper voice room to sigh. The fourth falls a semitone into a third; the bass stays still, so the motion consoles without announcing a final cadence.</Heading>
-          <div className="grid-two">
-            {pairs.map((pair, i) => <div className="surface" key={pair.label} data-testid={`card-dyad-pair-${i + 1}`}><div className="stat-label">PAIR {i + 1} · {i === 0 ? 'ROOT OVER FIFTH' : 'STEP-UP ROOT'}</div><div className="stat-value">{pitchName(pair.start[0])} + {pitchName(pair.start[1])} &nbsp;→&nbsp; {pitchName(pair.rest[0])} + {pitchName(pair.rest[1])}</div><p>{i === 0 ? `P4 settles to M3 while ${pitchName(pair.start[1])} remains in place.` : 'The same sigh shifts upward by a whole step; its bass remains fixed.'}</p></div>)}
+          <Heading number="01" title="Start with two notes">Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. This small downward movement makes the gentle “sigh” used throughout the guide. Two notes played together are called a dyad.</Heading>
+          <div className="learning-note" data-testid="foundation-interval-explanation">
+            <h3>What does “P4 settles to M3” actually mean?</h3>
+            <p>An <strong>interval</strong> is the distance between two notes. A <strong>semitone</strong> is one step to the next piano key, counting both black and white keys. A whole step is two semitone steps.</p>
+            <ul>
+              <li><strong>P4 = perfect fourth:</strong> the upper note is 5 semitone steps above the lower note.</li>
+              <li><strong>M3 = major third:</strong> the upper note is 4 semitone steps above the lower note.</li>
+              <li><strong>“Settles” describes the effect:</strong> lower the upper note by one semitone while holding the lower note still. The gap narrows from 5 steps to 4. In this musical setting, it can sound like a small release of tension.</li>
+            </ul>
+            <p>You do not need to memorize those names to try it. Use the exact notes below, and count four steady beats per bar (one group of 1–2–3–4).</p>
           </div>
+          <div className="grid-two">
+            {pairs.map((pair, i) => <div className="surface" key={pair.label} data-testid={`card-dyad-pair-${i + 1}`}>
+              <div className="stat-label">BAR {i + 1} · {i === 0 ? 'TRY THE FIRST SIGH' : 'REPEAT TWO KEYS HIGHER'}</div>
+              <h3>Hold {pitchName(pair.start[1])}; move {pitchName(pair.start[0])} to {pitchName(pair.rest[0])}</h3>
+              <ol className="playing-steps">
+                <li><strong>Beat 1:</strong> play {pitchName(pair.start[1])} and {pitchName(pair.start[0])} together.</li>
+                <li><strong>Beat 2:</strong> keep both notes held.</li>
+                <li><strong>Beat 3:</strong> keep {pitchName(pair.start[1])} held. Release {pitchName(pair.start[0])} and play {pitchName(pair.rest[0])}, the next key to its left.</li>
+                <li><strong>Beat 4:</strong> keep both notes held, then release at the end of the bar.</li>
+              </ol>
+              <p>The lower note is the <strong>bass</strong>. The gap above it changes from a perfect fourth (5 steps) to a major third (4 steps).</p>
+            </div>)}
+          </div>
+          <details className="learning-note staff-explanation"><summary>Optional: see the same two-note movement as sheet music</summary>
+          <p>The five horizontal lines are a staff. Notes higher on the staff sound higher. This is the same example as the piano roll below, not an extra exercise; you can skip it if you do not read music.</p>
           <Viz svg={staffSvg(pairs)} label="diagram-dyad-staff" />
-          <Viz svg={pianoRollSvg(dyadEvents, 2, 'Two parallel sighs · two bars')} label="diagram-dyad-piano-roll" />
-          <h3>Eight-bar expanded progression</h3>
+          </details>
+          <PianoRoll events={dyadEvents} bars={2} title="Two gentle sighs · one in each bar" testId="diagram-dyad-piano-roll" />
+          <h3>Next: turn the idea into an eight-bar chord sequence</h3>
+          <p className="beginner-intro">A <strong>chord</strong> is a group of notes played together. A <strong>progression</strong> is a sequence of chords. In the roll below, play each vertical stack together and hold it for the length of its blocks. The first three chords each last two bars; the final two each last one bar.</p>
           <div className="chord-ribbon" aria-label="Eight-bar chord progression" data-testid="progression-chord-ribbon">
             {['i(add9)', '♭VImaj7', '♭IImaj7', 'ivm9 / V7sus4'].map((chord, i) => <div className="chord-step" key={chord}><strong>{chord}</strong><span>{['BARS 1–2', 'BARS 3–4', 'BARS 5–6', 'BARS 7–8'][i]}</span></div>).flatMap((el, i) => i < 3 ? [el, <span className="arrow" key={`arrow-${i}`} aria-hidden="true">→</span>] : [el])}
           </div>
-          <Viz svg={pianoRollSvg(progressionEvents, 8, `Eight-bar harmonic map · ${key} minor`)} label="diagram-eight-bar-progression" />
-          <div className="note" data-testid="note-progression-ending">The final two bars briefly divide the closing color: <b>ivm9</b> opens the room, then <b>V7sus4</b> suspends the ending rather than forcing a resolution.</div>
+          <details className="learning-note" data-testid="foundation-chord-symbol-help">
+            <summary>What do those chord symbols mean?</summary>
+            <p>Roman numerals identify a chord’s starting note relative to “home.” Lowercase means minor; uppercase means major. ♭ means the starting note is lowered by one semitone.</p>
+            <dl className="chord-glossary">
+              <div><dt>i(add9)</dt><dd>The home minor chord, plus an extra note called the ninth for a gentle, open sound.</dd></div>
+              <div><dt>♭VImaj7</dt><dd>A major chord built on the lowered sixth step of the major scale of your chosen key, with a major-seventh color note added.</dd></div>
+              <div><dt>♭IImaj7</dt><dd>A major-seventh chord starting just one semitone above the home note.</dd></div>
+              <div><dt>ivm9</dt><dd>A minor chord starting five semitones above home, with a seventh and ninth added.</dd></div>
+              <div><dt>V7sus4</dt><dd>A chord starting seven semitones above home. “sus4” replaces its usual third with a fourth; “7” adds a seventh. This leaves an open, unfinished feeling.</dd></div>
+            </dl>
+            <p>No need to work out those notes yourself: the piano roll and its note list show the exact keys to play.</p>
+          </details>
+          <PianoRoll events={progressionEvents} bars={8} title={`Eight-bar chord sequence · ${key} minor`} testId="diagram-eight-bar-progression" />
+          <div className="note" data-testid="note-progression-ending">In bar 7, play the notes of <b>ivm9</b> together. In bar 8, switch to <b>V7sus4</b>. Rather than returning to the home chord, stop on that open sound. This is one way to let an ending feel unfinished.</div>
         </>}
         {tab === 1 && <>
-          <Heading number="02" title="The sincere fragment">A short motif can carry more weight than a continuous melody. Let each note change the listener’s expectation, then give the phrase silence in which to remain.</Heading>
+          <Heading number="02" title="The sincere fragment">A melody is a sequence of single notes; a motif is a short, recognizable pattern within it. Start with just three notes, each a little lower than the last. Leave silence afterward instead of adding more notes.</Heading>
           <div className="grid-three">
             {[
-              ['01', 'The Longing', 'Open with the ninth above the minor root. It asks a question without spelling out the answer.'],
-              ['02', 'The Ache', 'Move down one semitone. Keep the touch and timing restrained; this is a small change with a large emotional effect.'],
-              ['03', 'The Consolation', `Land on ${pitchName(root + 24)}, the major third of ♭VI in this example. Let the new chord carry the warmth.`],
+              ['01', 'The Longing', `Start on ${pitchName(root + 26)}. This is the “ninth” color: two semitone steps above the home note, played in a higher octave. Play it softly on beat 1 of bar 1.`],
+              ['02', 'The Ache', `On beat 3 of bar 1, play ${pitchName(root + 25)} — the very next piano key to the left. That small move is one semitone.`],
+              ['03', 'The Consolation', `On beat 1 of bar 2, play ${pitchName(root + 24)}, one more key to the left. Hold it for 3.5 beats. It is also a note in the warm major chord used in the progression.`],
             ].map(([n, title, copy]) => <div className="surface" key={n} data-testid={`card-melody-step-${n}`}><span className="step-number">{n}</span><h3 style={{ display: 'inline' }}>{title}</h3><p>{copy}</p></div>)}
           </div>
-          <Viz svg={pianoRollSvg(melodyEvents(key), 8, `Right hand · fragment and breathing room · ${key}`, [2, 3, 4, 5])} label="diagram-sincere-fragment" />
-          <div className="note" data-testid="note-melody-rest"><b>Bars 4–6 are intentionally empty.</b> Avoid filling the gap with a new motif. Let piano decay, pad motion, and room tone carry the memory of the phrase.</div>
+          <PianoRoll events={melodyEvents(key)} bars={8} title={`Three-note melody and breathing room · ${key}`} restBars={[2, 3, 4, 5]} testId="diagram-sincere-fragment" />
+          <div className="note" data-testid="note-melody-rest"><b>Bars 3–6 are intentionally empty.</b> Play no new melody notes here. Let the previous notes fade and leave room for background sounds. The three-note melody returns in bars 7–8.</div>
         </>}
         {tab === 2 && <>
-          <Heading number="03" title="Variations & transformations">Keep the emotional grammar, then change one compositional parameter at a time: entry, register, sustain, landing, harmonic brightness, timing, or the bass floor.</Heading>
+          <Heading number="03" title="Variations & transformations">A variation changes one part of an existing idea. Try moving the melody’s start time, playing it higher or lower, or holding a note longer. Choose an example below and compare its note list with the original three-note melody.</Heading>
           <div className="keyline"><label htmlFor="variation-choice">Choose a transformation to inspect</label><select className="variation-select" id="variation-choice" value={variation} onChange={e => setVariation(Number(e.target.value))} data-testid="select-transformation">{VARIATIONS.map((v, i) => <option value={i} key={v.kind}>{v.name}</option>)}</select></div>
           <div className="surface" data-testid="selected-transformation"><div className="kicker">{currentVariation.name}</div><h3>{currentVariation.summary}</h3><p>{currentVariation.detail}</p></div>
-          <Viz svg={pianoRollSvg(variationEvents(key, currentVariation.kind), 8, `${currentVariation.name} · ${key} minor`)} label="diagram-selected-transformation" />
+          <PianoRoll events={variationEvents(key, currentVariation.kind)} bars={8} title={`${currentVariation.name} · ${key} minor`} testId="diagram-selected-transformation" />
           <h3>The full transformation catalog</h3>
           <div className="grid-two">{VARIATIONS.map(v => <article className="variation-card" key={v.kind} data-testid={`card-transformation-${v.kind}`}><strong>{v.name}</strong><span>{v.summary}</span></article>)}</div>
         </>}
         {tab === 3 && <>
-          <Heading number="04" title="Mediated distance & sound design">The source should feel remembered rather than merely reverberant. Separate the layers by attack, register, width, and distance; process the endings, not every moment.</Heading>
+          <Heading number="04" title="Mediated distance & sound design">Sound design means shaping an instrument’s tone. Keep one clear piano sound close to the listener, then add softer, slower sounds behind it. “Mediated distance” means making those background sounds feel filtered or half-remembered, rather than simply louder or quieter.</Heading>
           <div className="grid-two">
-            <div className="surface" data-testid="recipe-piano"><div className="kicker">Piano layer</div><h3>Soft felt tone</h3><p>Choose a felt piano, muted grand, or a softened sampled instrument (for example, Pianoteq or a Kawai felt-style patch).</p><ul><li>Velocity: 40–60</li><li>Warm, close mic perspective</li><li>Dark room decay; avoid a bright transient</li></ul></div>
-            <div className="surface" data-testid="recipe-strings"><div className="kicker">String / pad swell</div><h3>Slow arrival</h3><p>Build the mid-ground with a slow string layer, detuned saw, or vintage polysynth (such as a Voyetra-style voice or MiniFreak).</p><ul><li>Attack: 600–900 ms</li><li>24 dB low-pass filter</li><li>Subtle chorus / ensemble</li></ul></div>
-            <div className="surface" data-testid="recipe-granular"><div className="kicker">Granular residue</div><h3>Tail-only weather</h3><p>Use a granular emitter such as SoundMorph Dust, or freeze a BBD-style delay such as u-he Colour Copy on the final edge of a phrase.</p><ul><li>Automate send on phrase tails</li><li>Keep the dry note recognizable</li><li>Do not smear the full mix</li></ul></div>
-            <div className="surface" data-testid="recipe-bass"><div className="kicker">Bass layer</div><h3>Emotional floor</h3><p>Use a rounded triangle or sine tone that supports the harmony without becoming a rhythmic groove.</p><ul><li>Filter below 300–500 Hz</li><li>Long, even sustain</li><li>Keep attacks soft and level low</li></ul></div>
+            <div className="surface" data-testid="recipe-piano"><div className="kicker">Piano layer</div><h3>Soft felt tone</h3><p>Choose a felt piano, muted grand, or a softened sampled instrument (for example, Pianoteq or a Kawai felt-style patch).</p><ul><li>Velocity: 40–60. Velocity is how firmly a MIDI note is played, on a 1–127 scale.</li><li>Choose a close microphone sound for intimate detail.</li><li>Use dark reverb: a soft room-like echo. Avoid a sharp, bright initial hit (the transient).</li></ul></div>
+            <div className="surface" data-testid="recipe-strings"><div className="kicker">String / pad swell</div><h3>Slow arrival</h3><p>A pad is a soft, sustained background sound. Use slow strings or a warm synthesizer preset beneath the piano.</p><ul><li>Attack: 600–900 ms. Let the sound fade in over 0.6–0.9 seconds rather than start abruptly.</li><li>Use a low-pass filter to remove bright high frequencies. A 24 dB/octave setting makes that reduction fairly steep.</li><li>Add a little chorus or ensemble effect for gently moving, wider sound.</li></ul></div>
+            <div className="surface" data-testid="recipe-granular"><div className="kicker">Granular residue</div><h3>Process only the endings</h3><p>Granular effects break a recording into tiny pieces and scatter or stretch them. Try an effect such as SoundMorph Dust on the fading end of a phrase, not every note.</p><ul><li>A send routes some of an instrument’s sound to an effect. Raise it briefly at the phrase ending.</li><li>Keep the dry (unprocessed) piano recognizable.</li><li>A delay (repeating echo), such as u-he Colour Copy, is another way to extend a note’s ending.</li></ul></div>
+            <div className="surface" data-testid="recipe-bass"><div className="kicker">Bass layer</div><h3>A soft low foundation</h3><p>Use a rounded sine or triangle synthesizer tone: a simple, smooth sound rather than a bright or buzzy one.</p><ul><li>Try a low-pass filter with its cutoff around 300–500 Hz to reduce higher frequencies.</li><li>Sustain means holding the note. Keep it long and even.</li><li>Let the sound start softly and stay quiet, supporting the higher notes rather than creating a beat.</li></ul></div>
           </div>
           <div className="note" data-testid="note-depth-arrangement">Depth is an arrangement decision as much as an effects decision: keep one close, legible source while the softer layers lose definition behind it.</div>
         </>}
         {tab === 4 && <>
-          <Heading number="05" title="Environmental setting & space">A quiet physical cue can make an abstract harmony feel located. Room tone, ventilation, nighttime rain, or a distant field recording suggest a place without fully describing it.</Heading>
+          <Heading number="05" title="Environmental setting & space">Add a very quiet recording of a real place beneath the music. This is a field recording. Room tone (the quiet background sound of a room), ventilation, or nighttime rain can suggest a location without turning the piece into a sound-effects scene.</Heading>
           <Viz svg={mixMatrixSvg} label="diagram-environment-signal-flow" />
           <div className="grid-two">
             <div className="surface" data-testid="environment-listening-layers"><div className="kicker">Listening layers</div><h3>Foreground → background</h3><p><b>Foreground:</b> piano attack and intimate detail.</p><p><b>Mid-ground:</b> slow string or pad swell with softened edges.</p><p><b>Background:</b> granular residue restricted to tails.</p><p><b>Environment:</b> room tone or field recording, continuous but very low.</p></div>

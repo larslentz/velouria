@@ -1,0 +1,94 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  KEYS, VARIATIONS, dyadPairs, dyadSighEvents, expandedProgression,
+  keyRootMidi, melodyEvents, pianoRollLayout, pianoRollSvg, pitchName, variationEvents,
+} from '../src/music.ts';
+
+function examples(key) {
+  return [
+    { events: dyadSighEvents(key), bars: 2 },
+    { events: expandedProgression(key).flatMap(chord => chord.notes.map(pitch => ({
+      pitch, start: chord.start, duration: chord.duration, label: chord.label,
+    }))), bars: 8 },
+    { events: melodyEvents(key), bars: 8 },
+    ...VARIATIONS.map(v => ({ events: variationEvents(key, v.kind), bars: 8 })),
+  ];
+}
+
+test('every key has a perfect fourth narrowing to a major third over an unchanged bass', () => {
+  for (const key of KEYS) for (const pair of dyadPairs(key)) {
+    assert.equal(pair.start[0] - pair.start[1], 5);
+    assert.equal(pair.rest[0] - pair.rest[1], 4);
+    assert.equal(pair.start[1], pair.rest[1]);
+    assert.equal(pair.start[0] - pair.rest[0], 1);
+  }
+});
+
+test('dyad timing matches the instructions: bass held four beats, top changes on beat three', () => {
+  for (const key of KEYS) {
+    const events = dyadSighEvents(key);
+    for (let bar = 0; bar < 2; bar++) {
+      const [bass, first, release] = events.slice(bar * 3, bar * 3 + 3);
+      assert.equal(bass.start, bar * 4);
+      assert.equal(bass.duration, 4);
+      assert.equal(first.start, bar * 4);
+      assert.equal(first.duration, 2);
+      assert.equal(release.start, bar * 4 + 2);
+      assert.equal(release.duration, 2);
+      assert.equal(first.pitch - release.pitch, 1);
+    }
+  }
+});
+
+test('all rolls use readable 28px pitch rows and only the required pitch range', () => {
+  for (const key of KEYS) for (const { events, bars } of examples(key)) {
+    const layout = pianoRollLayout(events, bars);
+    assert.equal(layout.rowHeight, 28);
+    assert.equal(layout.min, Math.min(...events.map(e => e.pitch)) - 2);
+    assert.equal(layout.max, Math.max(...events.map(e => e.pitch)) + 2);
+    assert.ok(layout.beatWidth >= 40);
+    const svg = pianoRollSvg(events, bars);
+    assert.ok(svg.includes(`min-width:${layout.width}px`), 'prevent mobile text shrinking');
+    for (const event of events) assert.ok(svg.includes(`>${pitchName(event.pitch)}</text>`));
+  }
+});
+
+test('rendered notes align with their named pitch row, exact beat, and duration in every key', () => {
+  for (const key of KEYS) for (const { events, bars } of examples(key)) {
+    const layout = pianoRollLayout(events, bars);
+    const svg = pianoRollSvg(events, bars);
+    const blocks = [...svg.matchAll(/<rect class="piano-roll-note"[^>]+>/g)].map(([tag]) =>
+      Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, name, value]) => [name, value])));
+    assert.equal(blocks.length, events.length);
+    events.forEach((event, index) => {
+      const block = blocks[index];
+      assert.equal(Number(block.y), layout.top + (layout.max - event.pitch) * 28 + 3);
+      assert.equal(Number(block.x), layout.left + event.start * layout.beatWidth);
+      assert.ok(Math.abs(Number(block.width) - event.duration * layout.beatWidth) < .0001);
+      assert.equal(Number(block.height), 22);
+      assert.ok(event.start >= 0 && event.start + event.duration <= bars * 4);
+    });
+  }
+});
+
+test('melody is silent throughout bars three to six', () => {
+  for (const key of KEYS) for (const event of melodyEvents(key)) {
+    assert.ok(event.start + event.duration <= 8 || event.start >= 24);
+  }
+});
+
+test('warm arpeggio uses only notes of the stated flat-six major-seventh chord', () => {
+  for (const key of KEYS) {
+    const root = keyRootMidi(key);
+    const chord = new Set([8, 12, 15, 19].map(n => (root + n) % 12));
+    for (const event of variationEvents(key, 'warm')) assert.ok(chord.has(event.pitch % 12));
+  }
+});
+
+test('ghost entrance and late breath have their stated one-beat and half-beat offsets', () => {
+  for (const key of KEYS) {
+    assert.equal(variationEvents(key, 'ghost')[0].start, 1);
+    assert.equal(variationEvents(key, 'late')[0].start, .5);
+  }
+});

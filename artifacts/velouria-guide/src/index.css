@@ -75,6 +75,33 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .viz { margin:22px 0; border:1px solid #303a44; border-radius:14px; overflow:hidden; background:#111821; }
 .viz svg { width:100%; height:auto; display:block; }
 .viz-scroll { overflow-x:auto; } .viz-scroll svg { min-width:700px; }
+.beginner-intro { color:#bac3c7; font-size:15px; line-height:1.75; max-width:900px; }
+.learning-note { border:1px solid #34404a; background:#141c24; padding:22px 24px; margin:22px 0; color:#c6ced2; font-size:15px; line-height:1.8; }
+.learning-note h3 { color:#ead7a8; font-size:21px; line-height:1.4; margin:0 0 14px; font-weight:500; }
+.learning-note p { margin:12px 0; }
+.learning-note ul { padding-left:22px; }
+.learning-note li { margin:10px 0; }
+.learning-note summary,.roll-note-list summary { color:#ead7a8; cursor:pointer; font-size:15px; padding:5px 0; }
+.learning-note summary:focus-visible,.roll-note-list summary:focus-visible,.piano-roll-region:focus-visible,.note-table-scroll:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
+.playing-steps { padding-left:21px; color:#c6ced2; font-size:15px; line-height:1.8; }
+.playing-steps li { margin:10px 0; }
+.chord-glossary { margin:18px 0; }
+.chord-glossary>div { display:grid; grid-template-columns:110px minmax(0,1fr); gap:14px; margin:15px 0; }
+.chord-glossary dt { color:#ead7a8; font-family:'Space Mono',monospace; }
+.chord-glossary dd { margin:0; }
+.piano-roll-study { margin:32px 0 38px; min-width:0; }
+.piano-roll-study figcaption h3 { color:#eee5d2; font-size:21px; font-weight:500; margin:0 0 10px; }
+.piano-roll-study figcaption p { color:#bdc7cd; font-size:15px; line-height:1.7; max-width:920px; }
+.piano-roll-study .roll-reading-tip { color:#a8b7c3; font-size:14px; }
+.piano-roll-region { margin:16px 0 12px; scrollbar-color:#718393 #111821; }
+.roll-note-list { border-bottom:1px solid #34404a; padding:8px 0 14px; }
+.note-table-scroll { max-width:100%; overflow-x:auto; margin-top:16px; }
+.note-table-scroll table { width:100%; min-width:640px; border-collapse:collapse; color:#ccd3d6; font-size:14px; line-height:1.65; text-align:left; }
+.note-table-scroll caption { text-align:left; color:#a8b7c3; margin-bottom:14px; }
+.note-table-scroll th,.note-table-scroll td { padding:12px 14px; border-bottom:1px solid #34404a; vertical-align:top; }
+.note-table-scroll th { color:#ead7a8; background:#17212b; font-weight:500; }
+.note-table-scroll td:first-child { white-space:nowrap; }
+.note-table-scroll .note-names { font-family:'Space Mono',monospace; color:#f0d9a8; min-width:125px; }
 .chord-ribbon { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:19px; border:1px solid #3b454d; background:#171f28; margin:16px 0 20px; }
 .chord-step strong { display:block; font-size:17px; color:#e5d7b3; font-weight:500; }
 .chord-step span { display:block; color:#8e9aa2; font:9px 'Space Mono',monospace; margin-top:6px; }
@@ -96,5 +123,7 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
  .keyline { align-items:flex-start; flex-direction:column; gap:10px; }
  .chord-ribbon { overflow-x:auto; justify-content:flex-start; } .chord-step { min-width:100px; }
  .tab-button { min-width:132px; }
+ .learning-note { padding:18px; }
+ .chord-glossary>div { grid-template-columns:1fr; gap:3px; }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; } }
