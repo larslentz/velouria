@@ -147,7 +147,7 @@ export function staffSvg(pairs:Dyad[]){
   const groups=pairs.flatMap(p=>[p.start,p.rest]); groups.forEach((notes,gi)=>{const x=positions[gi];notes.forEach(midi=>{const [steps,acc]=staffPos(midi),y=bottom-steps*gap/2,nx=x;if(steps<0)for(let k=-2;k>=steps;k-=2){const ly=bottom-k*gap/2;s+=`<line x1="${nx-11}" y1="${ly}" x2="${nx+11}" y2="${ly}" stroke="#9ba7b3"/>`;}s+=`<ellipse cx="${nx}" cy="${y}" rx="8" ry="5.6" transform="rotate(-18 ${nx} ${y})" fill="#d9bd7b" stroke="#f4dfaa"/><line x1="${nx+7}" y1="${y}" x2="${nx+7}" y2="${y-35}" stroke="#d9bd7b" stroke-width="1.5"/>`;if(acc)s+=`<text x="${nx-17}" y="${y+5}" fill="#d9bd7b" font-family="serif" font-size="17">${acc}</text>`;});s+=`<text x="${x}" y="222" text-anchor="middle" fill="#eff1f2" font-family="Space Mono,monospace" font-size="12">${notes.map(pitchName).join(' + ')}</text><text x="${x}" y="246" text-anchor="middle" fill="#cfb477" font-family="Figtree,sans-serif" font-size="14" font-weight="600">${captions[gi][0]}</text><text x="${x}" y="266" text-anchor="middle" fill="#b1bdc6" font-family="Figtree,sans-serif" font-size="12">${captions[gi][1]}</text>`;});
   return s+`<text x="265" y="302" text-anchor="middle" fill="#aab7c3" font-family="Figtree,sans-serif" font-size="12">upper note moves one key left · lower note stays held</text><text x="645" y="302" text-anchor="middle" fill="#aab7c3" font-family="Figtree,sans-serif" font-size="12">repeat the movement two keys higher</text></svg>`;
 }
-export const mixMatrixSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 330" role="img" aria-label="Example of separate layers: foreground piano, mid-ground strings, background texture, and quiet room tone">
+export const mixMatrixSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 330" role="img" aria-label="Example of separate layers at different distances: foreground piano, mid-ground strings, and quieter background textures">
 <defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#ae9a71"/></marker></defs>
 <rect width="950" height="330" rx="18" fill="#111821"/>
 <text x="26" y="32" fill="#d8c18e" font-family="Figtree,sans-serif" font-size="12" letter-spacing="1.3">EXAMPLE LAYERS · DEPTH × FREQUENCY</text>
@@ -165,5 +165,5 @@ export const mixMatrixSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 
 <text x="477" y="229" fill="#e0d1ee" font-family="Figtree,sans-serif" font-size="15" font-weight="600">Texture · far edge</text>
 <text x="477" y="247" fill="#aab2b9" font-family="Figtree,sans-serif" font-size="11">Dust / tape loops / phrase-ending effects</text>
 <rect x="222" y="267" width="556" height="38" rx="10" fill="#668178" fill-opacity=".14" stroke="#819a8d" stroke-opacity=".7"/>
-<text x="244" y="291" fill="#c8d9cf" font-family="Figtree,sans-serif" font-size="14" font-weight="600">Room tone / environment · continuous, very low</text>
+<text x="244" y="291" fill="#c8d9cf" font-family="Figtree,sans-serif" font-size="14" font-weight="600">Ambient texture · continuous, very low</text>
 </svg>`;

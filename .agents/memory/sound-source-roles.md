@@ -1,13 +1,13 @@
 ---
 name: Sound sources and musical roles
-description: User corrections about Dust and the roles of orchestral recordings and tape loops in Velouria.
+description: User guidance on layer roles, field recordings, and sound-source choices in Velouria.
 ---
 
-In the Environment module, describe SoundMorph Dust as a standalone instrument providing its own background texture, not an audio effect processing another recording or instrument’s notes.
+In the Layers module, describe SoundMorph Dust as a standalone instrument providing its own background texture, not an audio effect processing another recording or instrument’s notes.
 
-**Why:** The user corrected an inaccurate phrase-ending processing recommendation and requested Dust separately as an Environment layer.
+**Why:** The user corrected an inaccurate phrase-ending processing recommendation and requested Dust separately as a texture layer.
 
-**How to apply:** Keep this distinction in Environment guidance. Do not add Dust as a contrast or aside in Phrase Effects.
+**How to apply:** Keep this distinction in Layers guidance. Do not add Dust as a contrast or aside in Phrase Effects.
 
 When describing phrase effects, frame them as experiments to find the right feeling for the piece, not as a process limited to phrase endings. An ending treatment is one possible technique; other parts or whole phrases may also use effects.
 
@@ -23,7 +23,7 @@ Orchestral recordings and other tape-loop material can be background texture or 
 
 SoundBetter Halo Effect loop captures are another potential background-effects layer alongside SoundMorph Dust, orchestral or tape-loop material, and field recordings.
 
-**Why:** The user explicitly asked to include Halo Effect loop captures as a background option and not make the Environment section all about Dust.
+**Why:** The user explicitly asked to include Halo Effect loop captures as a background option and not make the Layers section all about Dust.
 
 **How to apply:** Present Dust as one independent texture option among multiple distinct background layers; do not treat it as required or as the only texture source.
 
@@ -32,3 +32,9 @@ Field recordings are a background layer found in most Velouria compositions.
 **Why:** The user stated this as a characteristic of Velouria and asked for a separate guide to using field recordings behind the music.
 
 **How to apply:** Explain how to select, layer, fade, and balance a field recording behind the chords and melody, including how it can continue through melody rests.
+
+The fifth learning tab focuses on Layers; Environmental setting & space is a separate section below it.
+
+**Why:** The user asked to distinguish general musical/textural layers from the separate environmental-setting topic.
+
+**How to apply:** Keep layer roles and arrangement guidance first, then put field-recording and sense-of-place guidance in its own lower section.

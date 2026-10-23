@@ -6,15 +6,15 @@ import {
 import { PianoRoll } from './PianoRoll';
 import { ArrangementGuide } from './ArrangementGuide';
 import { CombinedArrangementPlayer } from './CombinedArrangementPlayer';
-import { EnvironmentTextures } from './EnvironmentTextures';
+import { LayerExamples } from './EnvironmentTextures';
 
 const BASE = import.meta.env.BASE_URL;
 const heroImage = `${BASE}images/velouria-hero.webp`;
 const definitionImage = `${BASE}images/velouria-definition.webp`;
-const tabs = ['Foundation', 'Sincere Fragment', 'Transformations', 'Sound Design', 'Environment', 'Music to Study'];
+const tabs = ['Foundation', 'Sincere Fragment', 'Transformations', 'Sound Design', 'Layers', 'Music to Study'];
 
-function Heading({ number, title, children }: { number: string; title: string; children: string }) {
-  return <header className="section-heading"><span className="section-index">{number}</span><div><h2>{title}</h2><p>{children}</p></div></header>;
+function Heading({ number, title, children, headingId }: { number: string; title: string; children: string; headingId?: string }) {
+  return <header className="section-heading"><span className="section-index">{number}</span><div><h2 id={headingId}>{title}</h2><p>{children}</p></div></header>;
 }
 function Viz({ svg, label }: { svg: string; label: string }) {
   return <div className="viz viz-scroll" data-testid={label} dangerouslySetInnerHTML={{ __html: svg }} />;
@@ -203,15 +203,28 @@ function App() {
           <div className="note" data-testid="note-depth-arrangement">Depth is an arrangement decision as much as an effects decision: keep one close, legible source while the softer layers lose definition behind it.</div>
         </>}
         {tab === 4 && <>
-          <Heading number="05" title="Environmental setting & space">Build a quiet setting beneath the music. A field recording captures a real place: room tone (the quiet sound of a room), ventilation, or nighttime rain can suggest a location. You can also use a texture instrument or an orchestral or tape-loop recording to add atmosphere; the background does not have to represent a real place.</Heading>
-          <Viz svg={mixMatrixSvg} label="diagram-environment-signal-flow" />
-          <p className="beginner-intro">This diagram shows example layers at different apparent distances, not an effects chain. Each instrument or recording has its own part; you do not route the piano through the strings or Dust.</p>
+          <Heading number="05" title="Layers">Build the composition from distinct parts. Foundation’s chords and the Sincere Fragment melody carry the main musical ideas; pads, recordings, and independent textures can add other layers. Add them one at a time, and decide whether each layer carries music or sits behind it as texture.</Heading>
+          <Viz svg={mixMatrixSvg} label="diagram-layer-depth" />
+          <p className="beginner-intro" data-testid="layer-diagram-intro">This diagram shows parts at different listening distances, not an effects chain. Each instrument or recording has its own track; the piano is not routed through the strings or Dust.</p>
           <div className="grid-two">
-            <div className="surface" data-testid="environment-listening-layers"><div className="kicker">Listening layers</div><h3>Foreground → background</h3><p><b>Foreground:</b> the recognizable melody or chord detail, played by piano, another instrument, or a recording.</p><p><b>Mid-ground:</b> slow string or pad swells with softened edges.</p><p><b>Background:</b> an independent texture instrument, a quiet orchestral or tape loop, or fading phrase-ending effects.</p><p><b>Environment:</b> room tone or a field recording, very low and able to continue through the melody’s rests.</p></div>
-            <div className="surface" data-testid="environment-composition-prompt"><div className="kicker">Composition prompt</div><h3>Place the listener somewhere</h3><p>Choose one quiet environmental sound and decide how far away it should feel. Keep its level low enough that it is noticed only when the music leaves space.</p><p>Filter or soften it so it does not compete with the main chords or melody, whether they come from piano or recordings. Let it continue through the melody’s rests.</p></div>
+            <div className="surface" data-testid="layer-listening-roles"><div className="kicker">Listening roles</div><h3>Foreground → background</h3><p><b>Foreground:</b> the clearest musical idea, such as the melody or a chord played by piano or another source.</p><p><b>Mid-ground:</b> sustained parts, such as soft strings or a pad, that support the music without taking over.</p><p><b>Background:</b> a quieter recording, loop, or independent texture that adds depth behind the main parts.</p></div>
+            <div className="surface" data-testid="layer-composition-prompt"><div className="kicker">Build by listening</div><h3>Add one layer at a time</h3><p>Start with Foundation’s chords and the Sincere Fragment melody. Together, these make a clear musical arrangement before you add extra layers.</p><p>Then bring in one soft pad, recording, or texture on its own track. A background layer can continue during the melody’s rests; lower or remove it if it hides the chords or melody.</p></div>
           </div>
-          <EnvironmentTextures />
-          <div className="note" data-testid="note-environment">The goal is an ambiguous location, not a sound-effects scene. A trace of air, rain, or distant machinery can make silence feel inhabited.</div>
+          <LayerExamples />
+          <section className="environment-setting-section" aria-labelledby="environment-setting-title" data-testid="environment-setting-space">
+            <Heading headingId="environment-setting-title" number="05A" title="Environmental setting & space">Some background layers can suggest a place or a memory. Field recordings—such as rain, wind, distant traffic, or a quiet room—are common in most Velouria compositions and can sit beneath the musical layers without becoming another lead part.</Heading>
+            <section className="learning-note field-recording-guide" aria-labelledby="field-recordings-title" data-testid="environment-field-recordings">
+              <h3 id="field-recordings-title">Field recordings: a quiet sense of place</h3>
+              <ol>
+                <li><strong>Choose a sound that leaves room for the music.</strong> A steady, distant texture usually sits more easily behind the chords and melody than a loud, busy sound or one with prominent musical notes.</li>
+                <li><strong>Put it on its own track behind the musical parts.</strong> Keep it quieter than Foundation’s chords and the Sincere Fragment melody, so it supports rather than replaces or obscures them.</li>
+                <li><strong>Fade it in and out gently.</strong> If you repeat a recording, use a clean edit or a short crossfade between repeats to avoid an abrupt seam or click.</li>
+                <li><strong>Listen through the whole cycle.</strong> A recording can continue through the melody’s rests in bars 3–6. Adjust its level or timing if it masks the chords, melody, or the quiet between phrases.</li>
+              </ol>
+              <p>Try muting and unmuting the recording to compare the piece with and without it. Keep it only if it adds the feeling of space or place you want.</p>
+            </section>
+            <div className="note" data-testid="note-environment">The aim is an ambiguous location, not a sound-effects scene. A trace of air, rain, or distant machinery can make silence feel inhabited.</div>
+          </section>
         </>}
         {tab === 5 && <>
           <Heading number="06" title="Music to Study">Use this playlist as a listening companion while exploring the guide. Notice one quality at a time: suspended harmony, a memorable melodic fragment, space between phrases, or textures sitting behind the main musical idea. You do not need to identify every note; listen for the feeling and how the layers work together.</Heading>

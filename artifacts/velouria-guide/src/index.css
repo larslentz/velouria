@@ -65,6 +65,7 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .tab-content { padding:40px 0 15px; animation:reveal .42s ease both; }
 .music-study-link { margin:16px 0 0; }
 .music-study-link a { color:var(--gold-bright); text-underline-offset:3px; }
+.environment-setting-section { margin-top:38px; padding-top:26px; border-top:1px solid #39434d; }
 @keyframes reveal { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 .section-heading { display:grid; grid-template-columns:62px minmax(0,1fr); gap:18px; margin-bottom:27px; }
 .section-index { color:var(--gold); font:14px 'Space Mono',monospace; padding-top:9px; }
