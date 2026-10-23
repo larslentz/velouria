@@ -212,7 +212,10 @@ function App() {
           </div>
           <LayerExamples />
           <section className="environment-setting-section" aria-labelledby="environment-setting-title" data-testid="environment-setting-space">
-            <Heading headingId="environment-setting-title" number="05A" title="Environmental setting & space">Some background layers can suggest a place or a memory. Field recordings—such as rain, wind, distant traffic, or a quiet room—are common in most Velouria compositions and can sit beneath the musical layers without becoming another lead part.</Heading>
+            <section className="learning-note environment-setting-item" aria-labelledby="environment-setting-title" data-testid="environment-setting-item">
+              <h3 id="environment-setting-title">Environmental setting & space</h3>
+              <p>Some background layers can suggest a place or a memory. Field recordings—such as rain, wind, distant traffic, or a quiet room—are common in most Velouria compositions and can sit beneath the musical layers without becoming another lead part.</p>
+            </section>
             <section className="learning-note field-recording-guide" aria-labelledby="field-recordings-title" data-testid="environment-field-recordings">
               <h3 id="field-recordings-title">Field recordings: a quiet sense of place</h3>
               <ol>
