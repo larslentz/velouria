@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -151,6 +153,13 @@ def render_hero() -> None:
 
 
 render_hero()
+
+with st.expander("Read the full Velouria definition"):
+    st.markdown(
+        (Path(__file__).parent / "content" / "velouria-definition.md").read_text(
+            encoding="utf-8"
+        )
+    )
 
 selected_key = st.selectbox(
     "Choose a tonal center",
