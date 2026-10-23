@@ -1,0 +1,53 @@
+Build an interactive educational web app (using Python and Streamlit) called "Velouria: The Compositional Guide".
+This app is an interactive, visual reference guide for composers and producers to learn and construct music in the Velouria genre. It does not create or export MIDI files; instead, it provides musical notation, interactive piano rolls, theory breakdowns, sound-design guidelines, and arrangement recipes.
+1. Header & Official Dictionary Definition
+At the top of the app (or in an expandable hero banner), include the dictionary entry:
+Ve·lou·ri·a /vəˈlʊər.i.ə/ noun
+Definition: A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space.
+Etymology: Coined from velour (a plush, soft-woven fabric) and aetheria / -ia (suggesting an atmospheric or dreamlike realm).
+Related Forms:
+Velouric (adj.): Exhibiting subtle qualities, traces, or underlying textures characteristic of Velouria.
+Velourian (adj./n.): Directly embodying the aesthetic and compositional principles of Velouria.
+2. Core Navigation: 5 Layer-by-Layer Modules
+Structure the app into five distinct instructional tabs or chapters:
+Module 1: Harmonic Movement & Dyads (The Foundation)
+Concept: Explain Harmonic Suspension and how parallel 4th-to-3rd sighing dyads create emotional consolation without resolving into predictable pop/classical cadences.
+Interactive Transposition Guide: A key selector (all 12 chromatic keys) that recalculates and displays:
+Symmetrical Base Progression:
+Pair 1 (over Root 5th): [P4 → M3] (e.g. in A♭: [A♭3+E♭3] → [G3+E♭3])
+Pair 2 (over Step-Up Root): [P4 → M3] (e.g. [B♭3+F3] → [A3+F3])
+8-Bar Expanded Progression:
+Im(add9) (Bars 1–2) ➔ ♭VImaj7 (Bars 3–4) ➔ ♭IImaj7 (Bars 5–6) ➔ IVm9 / V7sus4 (Bars 7–8).
+Notation & Piano Roll Display:
+Standard music staff notation (rendered using VexFlow or ABCjs in HTML/SVG).
+An interactive, stylized Piano Roll grid showing pitch rows, bars, and hold lengths.
+Module 2: The Sincere Fragment (Melody & Phrasing)
+Concept: Explain the principle of the short, 2-to-3 note descending motif and the power of silence between phrases.
+Melodic Formula:
+Step 1: The Longing (Question / tension over minor chord)
+Step 2: The Ache (Step-down half-step)
+Step 3: The Consolation (Landing on the warm major 3rd of the shifted chord)
+Visual Piano Roll: Display the right-hand notes over time, with clear annotations marking where intentional empty bars occur.
+Module 3: Variations & Transformations Catalog
+Provide visual notation, piano roll views, and musical explanations for the key variations:
+01 · Ghost Note: Skipping Beat 1 to start mid-thought.
+02 · Octave Dream: Dropping the melody and harmony down one octave for intimate weight.
+03 · Ringing Tail / Residue: Holding the final note across bar lines into granular space.
+04 · Warm Centre: Landing directly on the major 3rd and arpeggiating upward.
+05 · Twin Peaks Lift: Swapping the dream chord for a bright major chord before melting back into minor.
+06 · Dorian Sigh: Resolving downward to the 6th/2nd for wistful ambivalence.
+07 · Late Breath: Shifting melodic attacks half a beat late (Beat 1½) for human hesitation.
+08 · Drone Pedal: Anchoring the entire 8 bars with a single stationary open fifth in the bass.
+Module 4: Mediated Distance & Sound Design
+Provide concrete recipes for treating instruments:
+Piano Layer: Soft felt tone (e.g. Pianoteq / Kawai), velocities between 40–60, warm close mic placement with dark room decay.
+String / Pad Swell Layer: Slow attack (600–900 ms), 24 dB low-pass filter, subtle chorus/ensemble, detuned saws or vintage polysynth (Voyetra / MiniFreak).
+Granular Residue & Tape Weathering: Using granular emitters (SoundMorph Dust) or BBD delay freeze (u-he Colour Copy) strictly on the tail ends of phrases rather than across the whole mix.
+Bass Layer: Rounded triangle/sine wave filtered below 300–500 Hz to act as an emotional floor rather than a rhythmic groove.
+Module 5: Environmental Setting & Space
+Concept: How room tone, ventilation hum, quiet nighttime rain, and distant field recordings establish an ambiguous physical location.
+Mixing Matrix: A visual signal-flow diagram showing how foreground piano, mid-ground string swells, background granular tails, and room tone occupy distinct depths and frequency slots.
+3. Visual & Technical Implementation Details
+No MIDI Creation or Audio Generation: Keep the app focused on being a pure instructional manual and composition handbook.
+Visuals: Use HTML/CSS/Canvas or SVG to draw clear, elegant piano-roll representations and sheet music.
+Styling: Design a dark, refined UI (charcoal, deep navy, velvet-gold accents, and clean typography) fitting the Velourian aesthetic.

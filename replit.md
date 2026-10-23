@@ -1,10 +1,11 @@
-# [Project name]
+# Velouria: The Compositional Guide
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A Streamlit reference guide for composing Velouria-style ambient and chamber-inspired electronic music, with transposable harmony, notation, piano rolls, and sound-design guidance.
 
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `streamlit run app.py --server.port 5000 --server.address 0.0.0.0` — run the Velouria guide
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -14,6 +15,7 @@ _Replace the heading above with the project's name, and this line with one sente
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
+- Python 3.11, Streamlit
 - API: Express 5
 - DB: PostgreSQL + Drizzle ORM
 - Validation: Zod (`zod/v4`), `drizzle-zod`
@@ -22,15 +24,17 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `app.py` — Streamlit interface and five instructional modules
+- `velouria/music.py` — pitch transposition, progression data, and SVG notation / piano-roll diagrams
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The app is an instructional guide only; it does not generate or export audio or MIDI.
+- Piano rolls and staff examples are SVGs generated from the same pitch data used by the transposition selector.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+The guide teaches suspended dyads, short melodic fragments, eight compositional variations, sound-design recipes, and environmental depth. Selecting a tonal center transposes the musical examples across all modules.
 
 ## User preferences
 
