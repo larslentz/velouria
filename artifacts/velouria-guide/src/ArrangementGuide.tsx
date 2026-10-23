@@ -1,10 +1,12 @@
 import { arrangementPlan, pitchName } from './music';
+import { CombinedArrangementPlayer } from './CombinedArrangementPlayer';
 
 export function ArrangementGuide({ tonalKey }: { tonalKey: string }) {
   const plan = arrangementPlan(tonalKey);
   return <section className="learning-note arrangement-guide" id="arrangement-plan" aria-labelledby="arrangement-title" data-testid="arrangement-playing-plan">
     <h3 id="arrangement-title">How to put Foundation and Sincere Fragment together</h3>
     <p><strong>Foundation is the accompaniment; Sincere Fragment is the melody above it.</strong> They play at the same time. The tabs teach you the parts separately, not a sequence in which one part finishes before the next can begin.</p>
+    <CombinedArrangementPlayer tonalKey={tonalKey} />
     <ol className="playing-steps">
       <li><strong>First, practice the two-bar sigh on its own.</strong> Repeat those two bars a few times until the movement feels comfortable, then stop. This is a technique exercise, not an extra pattern that must keep running underneath everything else.</li>
       <li><strong>For your first arrangement, use the full eight-bar chord sequence as the backing.</strong> Play it once by itself as an introduction. Count 1–2–3–4 steadily in every bar; try 60 beats per minute to start (one beat per second). Strike each chord only at its marked start, then hold it for the length of its blocks. Do not strike it again on every beat.</li>

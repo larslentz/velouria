@@ -39,6 +39,16 @@ export function melodyEvents(key: string): Event[] {
     { start: 28, duration: 3, pitch: r + 24, label: 'landing' },
   ];
 }
+// Both parts share the same section beats: no introduction or repeated attacks.
+export function combinedArrangementEvents(key: string): Event[] {
+  return [
+    ...expandedProgression(key).flatMap(chord => chord.notes.map(pitch => ({
+      start: chord.start, duration: chord.duration, pitch,
+      label: `Foundation · ${chord.label}`,
+    }))),
+    ...melodyEvents(key).map(note => ({ ...note, label: `Sincere Fragment · ${note.label}` })),
+  ];
+}
 export function arrangementPlan(key: string) {
   const chords = expandedProgression(key);
   const melody = melodyEvents(key);

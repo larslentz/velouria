@@ -124,6 +124,9 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .arrangement-guide { scroll-margin-top:24px; }
 .arrangement-guide h4 { color:#ead7a8; font-size:18px; font-weight:500; margin:26px 0 10px; }
 .arrangement-key-point { border-left:2px solid var(--gold); padding-left:16px; }
+.arrangement-bar-strip { display:flex; flex-wrap:wrap; gap:8px; padding:0; list-style:none; }
+.arrangement-bar-strip li { padding:8px 12px; border:1px solid #52606b; border-radius:5px; color:#bdc7cd; font:12px 'Space Mono',monospace; }
+.arrangement-bar-strip li[aria-current="step"] { color:#10151c; background:#dfbf7d; border-color:#f5d99f; }
 .arrangement-table th:first-child { width:90px; }
 .arrangement-table td { width:44%; }
 .arrangement-table td p { margin:8px 0; }

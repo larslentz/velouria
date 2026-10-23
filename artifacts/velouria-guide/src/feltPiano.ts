@@ -1,5 +1,5 @@
 import type { Event as NoteEvent } from './music';
-import { playbackSchedule } from './playbackTiming';
+import { playbackSchedule } from './playbackTiming.ts';
 
 type Playback = {
   owner: string;

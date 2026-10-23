@@ -5,6 +5,7 @@ import {
 } from './music';
 import { PianoRoll } from './PianoRoll';
 import { ArrangementGuide } from './ArrangementGuide';
+import { CombinedArrangementPlayer } from './CombinedArrangementPlayer';
 import { EnvironmentTextures } from './EnvironmentTextures';
 
 const BASE = import.meta.env.BASE_URL;
@@ -154,6 +155,7 @@ function App() {
             ].map(([n, title, copy]) => <div className="surface" key={n} data-testid={`card-melody-step-${n}`}><span className="step-number">{n}</span><h3 style={{ display: 'inline' }}>{title}</h3><p>{copy}</p></div>)}
           </div>
           <PianoRoll events={melodyEvents(key)} bars={8} title={`Three-note melody and breathing room · ${key}`} restBars={[2, 3, 4, 5]} testId="diagram-sincere-fragment" />
+          <CombinedArrangementPlayer tonalKey={key} />
           <div className="note" data-testid="note-melody-rest"><b>Bars 3–6 are intentionally empty for the melody only.</b> Keep Foundation’s accompaniment going: hold the ♭VImaj7 chord through bars 3–4, then the ♭IImaj7 chord through bars 5–6. Play no new melody notes in those bars. The three-note melody returns in bars 7–8 while the accompaniment changes underneath it.</div>
           <div className="note" data-testid="melody-recorded-sources"><strong>A recorded phrase can be the sincere fragment.</strong> Instead of playing piano, use a short cello, violin, other orchestral, or tape-recorded phrase. To follow this example, select or edit recorded notes to match the three descending pitches and timing in the roll. Place them in bars 1–2 and 7–8, leaving bars 3–6 without new melody notes. Because the recording carries the recognizable melody, it is the fragment itself—not just background texture.</div>
         </>}
