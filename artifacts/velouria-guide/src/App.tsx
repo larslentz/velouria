@@ -64,6 +64,7 @@ function App() {
         <h3>Core Characteristics</h3>
         <ul><li><strong>Harmonic Suspension:</strong> Progressions and dyadic intervals (such as repeating fourth-to-third sighs) that hover, question, or console without resolving into conventional pop or classical cadences.</li>
           <li><strong>The Sincere Fragment:</strong> Short, evocative melodic motifs—often descending step-wise—that convey warmth or yearning rather than virtuosic complexity.</li>
+          <li><strong>Beautiful Unease:</strong> A compositional approach that brings harmonic suspension, a sincere melodic fragment, and variations through transformation together. The hovering harmony forms a foundation, the fragment carries a simple, expressive melody, and later variations reshape that melody while keeping it connected to its original idea.</li>
           <li><strong>Mediated Distance:</strong> The use of degraded tape loops, granular residue, soft filtering, and room tone to give foreground instruments (such as felt piano or vintage polysynths) the impression of a half-remembered transmission.</li>
           <li><strong>Environmental Setting:</strong> Subtle integration of field recordings, sub-bass drones, and quiet room acoustics that establish an ambiguous physical space beneath the music.</li></ul>
         <h3>Example in Context</h3><blockquote>“By pairing a soft Kawai piano motif with a distant, degraded synth swell and quiet window rain, the piece firmly establishes itself within <strong>Velouria</strong>.”</blockquote>
