@@ -20,3 +20,9 @@ Orchestral recordings and other tape-loop material can be background texture or 
 **Why:** The user explicitly requested both uses, not a restriction of recordings to environmental decoration.
 
 **How to apply:** Explain a source’s musical role and timing; do not imply piano is required or that recorded material is only atmosphere.
+
+SoundBetter Halo Effect loop captures are another potential background-effects layer alongside SoundMorph Dust, orchestral or tape-loop material, and field recordings.
+
+**Why:** The user explicitly asked to include Halo Effect loop captures as a background option and not make the Environment section all about Dust.
+
+**How to apply:** Present Dust as one independent texture option among multiple distinct background layers; do not treat it as required or as the only texture source.

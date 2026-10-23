@@ -1,12 +1,18 @@
 export function EnvironmentTextures() {
   return <>
-    <div className="grid-two">
+    <div className="grid-three">
       <article className="surface" data-testid="environment-dust">
-        <div className="kicker">Independent texture instrument</div>
-        <h3>SoundMorph Dust: a separate layer</h3>
+        <div className="kicker">Instrument texture option</div>
+        <h3>SoundMorph Dust</h3>
         <p>SoundMorph Dust is a standalone instrument that generates its own sound. In this arrangement, use it as a separate textural layer—not as an effect receiving the piano, recorded phrases, or their note endings.</p>
         <p>Give Dust its own track in your music software. Choose a subtle texture, bring it in quietly beneath Foundation’s chords and the Sincere Fragment melody, and let it continue through the melody’s rests. Fade it in or out over a later eight-bar repeat rather than making it compete with every melodic note.</p>
         <p>Listen for space, movement, and grain rather than another lead melody. If the texture has a clear musical pitch, check that it fits the chords underneath it.</p>
+      </article>
+      <article className="surface" data-testid="environment-halo-loop-captures">
+        <div className="kicker">Recorded-effects texture option</div>
+        <h3>SoundBetter Halo Effect loop captures</h3>
+        <p>Try these captured loops as a potential background-effects layer alongside instruments, orchestral excerpts, tape loops, and field recordings. Place them on their own track behind Foundation’s chords or the Sincere Fragment melody; they can add atmosphere without becoming the main melody.</p>
+        <p>Keep a capture quiet enough that the musical parts stay clear, and use fades at its start and end. Try different entry points or sections and listen for the feeling that best suits the piece. This is one possible texture, not a required ingredient.</p>
       </article>
       <article className="surface" data-testid="environment-recorded-texture">
         <div className="kicker">Orchestral recordings & tape loops</div>
