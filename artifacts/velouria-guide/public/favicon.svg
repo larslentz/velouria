@@ -1,3 +1,18 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="haze" cx="78%" cy="18%" r="90%">
+      <stop offset="0" stop-color="#43504a"/>
+      <stop offset="1" stop-color="#101419"/>
+    </radialGradient>
+    <linearGradient id="velour" x1="14" y1="16" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f5eddb"/>
+      <stop offset="1" stop-color="#c5a66c"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#haze)"/>
+  <path d="M15 17 28.5 46.5c1.4 3.1 4.6 3.1 6 0L50 17"
+        fill="none" stroke="url(#velour)" stroke-linecap="round" stroke-width="4"/>
+  <path d="M29 32V20m10 1V12" fill="none" stroke="#e8d7ae" stroke-linecap="round" stroke-width="1.7"/>
+  <circle cx="27.5" cy="33" r="3" fill="#e8d7ae"/>
+  <circle cx="37.5" cy="22" r="3" fill="#e8d7ae"/>
 </svg>
