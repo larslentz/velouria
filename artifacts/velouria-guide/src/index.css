@@ -85,6 +85,7 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .learning-note h3 { color:#ead7a8; font-size:21px; line-height:1.4; margin:0 0 14px; font-weight:500; }
 .learning-note p { margin:12px 0; }
 .learning-note ul { padding-left:22px; }
+.learning-note ol { padding-left:22px; }
 .learning-note li { margin:10px 0; }
 .learning-note summary,.roll-note-list summary { color:#ead7a8; cursor:pointer; font-size:15px; padding:5px 0; }
 .learning-note summary:focus-visible,.roll-note-list summary:focus-visible,.piano-roll-region:focus-visible,.note-table-scroll:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }

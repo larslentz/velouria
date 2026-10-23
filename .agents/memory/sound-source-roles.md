@@ -26,3 +26,9 @@ SoundBetter Halo Effect loop captures are another potential background-effects l
 **Why:** The user explicitly asked to include Halo Effect loop captures as a background option and not make the Environment section all about Dust.
 
 **How to apply:** Present Dust as one independent texture option among multiple distinct background layers; do not treat it as required or as the only texture source.
+
+Field recordings are a background layer found in most Velouria compositions.
+
+**Why:** The user stated this as a characteristic of Velouria and asked for a separate guide to using field recordings behind the music.
+
+**How to apply:** Explain how to select, layer, fade, and balance a field recording behind the chords and melody, including how it can continue through melody rests.

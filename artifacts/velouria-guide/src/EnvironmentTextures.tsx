@@ -1,5 +1,16 @@
 export function EnvironmentTextures() {
   return <>
+    <section className="learning-note field-recording-guide" aria-labelledby="field-recordings-title" data-testid="environment-field-recordings">
+      <h3 id="field-recordings-title">Field recordings: a quiet sense of place</h3>
+      <p>Field recordings—sounds captured in real places, such as rain, wind, distant traffic, or a quiet room—are a background layer in most Velouria compositions. They can suggest a location or a memory beneath the music without becoming another lead part.</p>
+      <ol>
+        <li><strong>Choose a sound that leaves room for the music.</strong> A steady, distant texture usually sits more easily behind the chords and melody than a loud, busy sound or one with prominent musical notes.</li>
+        <li><strong>Put it on its own track behind the musical parts.</strong> Keep it quieter than Foundation’s chords and the Sincere Fragment melody, so it supports rather than replaces or obscures them.</li>
+        <li><strong>Fade it in and out gently.</strong> If you repeat a recording, use a clean edit or a short crossfade between repeats to avoid an abrupt seam or click.</li>
+        <li><strong>Listen through the whole cycle.</strong> A recording can continue through the melody’s rests in bars 3–6. Adjust its level or timing if it masks the chords, melody, or the quiet between phrases.</li>
+      </ol>
+      <p>Try muting and unmuting the recording to compare the piece with and without it. Keep it only if it adds the feeling of space or place you want.</p>
+    </section>
     <div className="grid-three">
       <article className="surface" data-testid="environment-dust">
         <div className="kicker">Instrument texture option</div>
