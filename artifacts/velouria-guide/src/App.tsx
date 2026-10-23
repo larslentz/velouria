@@ -120,7 +120,7 @@ function App() {
           <p>The five horizontal lines are a staff. Notes higher on the staff sound higher. This is the same example as the piano roll below, not an extra exercise; you can skip it if you do not read music.</p>
           <Viz svg={staffSvg(pairs)} label="diagram-dyad-staff" />
           </details>
-          <PianoRoll events={dyadEvents} bars={2} title="Two gentle sighs · one in each bar" testId="diagram-dyad-piano-roll" />
+          <PianoRoll events={dyadEvents} bars={2} title={`Two gentle sighs · one in each bar · ${key} minor`} testId="diagram-dyad-piano-roll" />
           <h3>Next: turn the idea into an eight-bar chord sequence</h3>
           <p className="beginner-intro">A <strong>chord</strong> is a group of notes played together. A <strong>progression</strong> is a sequence of chords. For the suggested arrangement, use this sequence <strong>instead of continuously repeating the two-bar sigh exercise</strong>. Play each vertical stack together and hold it for the length of its blocks. The first three chords each last two bars; the final two each last one bar.</p>
           <div className="chord-ribbon" aria-label="Eight-bar chord progression" data-testid="progression-chord-ribbon">
@@ -199,7 +199,7 @@ function App() {
           <div className="note" data-testid="note-environment">The goal is an ambiguous location, not a sound-effects scene. A trace of air, rain, or distant machinery can make silence feel inhabited.</div>
         </>}
       </section>
-      <footer className="footer">A COMPOSITION HANDBOOK · FELT-STYLE PIANO PREVIEWS · USE THE DIAGRAMS AS WRITING PROMPTS</footer>
+      <footer className="footer">A COMPOSITION HANDBOOK · FELT-STYLE PIANO PREVIEWS + MIDI DOWNLOADS · USE THE DIAGRAMS AS WRITING PROMPTS</footer>
     </main>
   </div>;
 }

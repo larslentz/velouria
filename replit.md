@@ -31,7 +31,7 @@ A browser-based reference guide for composing Velouria-style ambient and chamber
 
 ## Architecture decisions
 
-- The guide includes playable piano-roll previews, as requested by the user. It does not export audio or MIDI files.
+- The guide includes playable piano-roll previews and downloadable Standard MIDI files for each roll and the combined arrangement, as requested by the user. MIDI exports preserve the selected key, tempo, timing and rests; the combined export separates accompaniment and melody onto synchronized tracks. It does not export recorded audio.
 - Piano previews use a local Web Audio felt-style tone model, not a recorded felt-piano sample library. This keeps playback self-contained on GitHub Pages without external sample downloads; describe the sound as modeled or felt-style, not as a recording of a real felt piano.
 - Piano rolls and staff examples are SVGs generated from the same pitch data used by the transposition selector.
 - The user chose a browser-only rebuild for GitHub Pages because Pages cannot host the Python/Streamlit runtime. Replit preview and Pages now use the same React implementation; retain the Python files as reference.

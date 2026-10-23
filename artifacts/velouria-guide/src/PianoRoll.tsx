@@ -53,8 +53,9 @@ export function PianoRoll({ events, bars, title, testId, restBars = [] }: Props)
         Stacked blocks are played together.</p>
       <p className="roll-reading-tip"><strong>Count 1–2–3–4 in each bar.</strong> The note number tells you its octave (pitch range): C4 is middle C; C5 is one octave higher. ♭ means “flat,” one key below the named note. Scroll sideways on smaller screens; the notes stay full-size.</p>
     </figcaption>
-    <PlaybackControls player={player} title={title} testId={testId} bars={bars} disabled={!events.length} />
+    <PlaybackControls player={player} title={title} testId={testId} bars={bars} disabled={!events.length} midiTracks={[{ name: title, events }]} />
     <p className="roll-sound-note">Soft, felt-style piano modeled in your browser. Plays this roll only, including its rests; starting another roll or the combined arrangement stops this one. BPM means beats per minute.</p>
+    <p className="roll-sound-note"><strong>Download MIDI</strong> saves this roll’s notes, timing, rests, selected key and tempo. Import the .mid file into your music software and choose a felt-piano instrument there. MIDI contains playing instructions, not recorded audio; the preview sound and volume setting are not included.</p>
     <div ref={region} className="viz viz-scroll piano-roll-region" role="region" aria-label={`${title} — scrollable piano roll`} tabIndex={0} data-testid={testId} dangerouslySetInnerHTML={{ __html: svg }} />
     <details className="roll-note-list" data-testid={`${testId}-note-list`}>
       <summary>Read the exact notes and timing as a list</summary>
