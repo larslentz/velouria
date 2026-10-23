@@ -1,1 +1,2 @@
 - [Preview routing checks](preview-routing.md) — a healthy standalone server can still be unreachable through an application-router preview.
+- [Decorative design scope](decorative-design.md) — Velouria ornament studies should retain the original fonts rather than redesign the typography.
