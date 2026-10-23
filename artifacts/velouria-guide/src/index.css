@@ -90,6 +90,18 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .chord-glossary dt { color:#ead7a8; font-family:'Space Mono',monospace; }
 .chord-glossary dd { margin:0; }
 .piano-roll-study { margin:32px 0 38px; min-width:0; }
+.roll-player { display:flex; flex-wrap:wrap; align-items:center; gap:16px 24px; padding:16px 18px; border:1px solid #3d484e; border-radius:10px; background:#172029; }
+.roll-play-button { display:inline-flex; justify-content:center; align-items:center; gap:9px; min-width:102px; min-height:44px; padding:10px 18px; background:#ddc18a; color:#111821; border:1px solid #f0d7a7; border-radius:6px; font:600 15px 'Figtree',sans-serif; cursor:pointer; }
+.roll-play-button:hover { background:#f0d7a7; }
+.roll-play-button:disabled { opacity:.5; cursor:not-allowed; }
+.roll-player label { display:flex; align-items:center; gap:10px; color:#c6ced2; font-size:14px; }
+.roll-player select { min-height:44px; padding:8px 10px; color:#eee5d2; background:#101820; border:1px solid #52606b; border-radius:5px; font:13px 'Space Mono',monospace; }
+.roll-player input[type="range"] { width:100px; min-height:44px; accent-color:#ddc18a; cursor:pointer; }
+.roll-player button:focus-visible,.roll-player select:focus-visible,.roll-player input:focus-visible { outline:2px solid #f0d7a7; outline-offset:4px; }
+.roll-play-position { color:#ead7a8; font:12px 'Space Mono',monospace; }
+.roll-sound-note { color:#aab7c3; font-size:13px; line-height:1.7; margin:10px 0; }
+.roll-player-error { color:#ffb8a5; font-size:14px; line-height:1.6; }
+.piano-roll-note.is-sounding { fill:#fff0c2; stroke:#fff7e5; stroke-width:1.5; }
 .piano-roll-study figcaption h3 { color:#eee5d2; font-size:21px; font-weight:500; margin:0 0 10px; }
 .piano-roll-study figcaption p { color:#bdc7cd; font-size:15px; line-height:1.7; max-width:920px; }
 .piano-roll-study .roll-reading-tip { color:#a8b7c3; font-size:14px; }

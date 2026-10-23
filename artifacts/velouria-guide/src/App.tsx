@@ -193,7 +193,7 @@ function App() {
           <div className="note" data-testid="note-environment">The goal is an ambiguous location, not a sound-effects scene. A trace of air, rain, or distant machinery can make silence feel inhabited.</div>
         </>}
       </section>
-      <footer className="footer">A COMPOSITION HANDBOOK · NO AUDIO OR MIDI GENERATION · USE THE DIAGRAMS AS WRITING PROMPTS</footer>
+      <footer className="footer">A COMPOSITION HANDBOOK · FELT-STYLE PIANO PREVIEWS · USE THE DIAGRAMS AS WRITING PROMPTS</footer>
     </main>
   </div>;
 }

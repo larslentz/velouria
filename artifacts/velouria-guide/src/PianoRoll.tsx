@@ -1,4 +1,6 @@
-import { pianoRollSvg, pitchName, type Event as NoteEvent } from './music';
+import { useEffect, useMemo, useRef } from 'react';
+import { pianoRollLayout, pianoRollSvg, pitchName, type Event as NoteEvent } from './music';
+import { usePianoPlayback } from './usePianoPlayback';
 
 type Props = {
   events: NoteEvent[];
@@ -9,6 +11,31 @@ type Props = {
 };
 
 export function PianoRoll({ events, bars, title, testId, restBars = [] }: Props) {
+  const player = usePianoPlayback(events, bars);
+  const region = useRef<HTMLDivElement>(null);
+  const restKey = restBars.join(',');
+  const svg = useMemo(() => pianoRollSvg(events, bars, title, restKey ? restKey.split(',').map(Number) : []), [events, bars, title, restKey]);
+  useEffect(() => {
+    const container = region.current;
+    const line = container?.querySelector<SVGLineElement>('[data-playhead]');
+    if (!container || !line) return;
+    const layout = pianoRollLayout(events, bars);
+    const position = layout.left + (player.beat ?? 0) * layout.beatWidth;
+    line.setAttribute('x1', String(position));
+    line.setAttribute('x2', String(position));
+    line.setAttribute('visibility', player.beat === null ? 'hidden' : 'visible');
+    container.querySelectorAll<SVGRectElement>('.piano-roll-note').forEach(note => {
+      const start = Number(note.dataset.start);
+      note.classList.toggle('is-sounding', player.beat !== null && player.beat >= start && player.beat < start + Number(note.dataset.duration));
+    });
+    if (player.beat !== null) {
+      const scale = (container.querySelector('svg')?.getBoundingClientRect().width ?? layout.width) / layout.width;
+      const x = position * scale;
+      if (x > container.scrollLeft + container.clientWidth - 45 || x < container.scrollLeft + 20) {
+        container.scrollLeft = Math.max(0, x - container.clientWidth * .45);
+      }
+    }
+  }, [player.beat, events, bars]);
   const groups = new Map<string, { start: number; duration: number; notes: number[]; label: string }>();
   for (const event of events) {
     const id = `${event.start}-${event.duration}-${event.label}`;
@@ -25,7 +52,23 @@ export function PianoRoll({ events, bars, title, testId, restBars = [] }: Props)
         Stacked blocks are played together.</p>
       <p className="roll-reading-tip"><strong>Count 1–2–3–4 in each bar.</strong> The note number tells you its octave (pitch range): C4 is middle C; C5 is one octave higher. ♭ means “flat,” one key below the named note. Scroll sideways on smaller screens; the notes stay full-size.</p>
     </figcaption>
-    <div className="viz viz-scroll piano-roll-region" role="region" aria-label={`${title} — scrollable piano roll`} tabIndex={0} data-testid={testId} dangerouslySetInnerHTML={{ __html: pianoRollSvg(events, bars, title, restBars) }} />
+    <div className="roll-player" data-testid={`${testId}-player`}>
+      <button type="button" className="roll-play-button" onClick={player.active ? player.stop : player.play} disabled={!events.length} aria-label={`${player.active ? 'Stop' : 'Play'} ${title}`} data-testid={`${testId}-play`}>
+        <span aria-hidden="true">{player.active ? '■' : '▶'}</span> {player.active ? 'Stop' : 'Play'}
+      </button>
+      <label htmlFor={`${player.owner}-tempo`}>Tempo
+        <select id={`${player.owner}-tempo`} value={player.bpm} onChange={event => player.setBpm(Number(event.target.value))}>
+          {[40, 50, 60, 70, 80, 100, 120].map(bpm => <option value={bpm} key={bpm}>{bpm} BPM</option>)}
+        </select>
+      </label>
+      <label htmlFor={`${player.owner}-volume`}>Volume
+        <input id={`${player.owner}-volume`} type="range" min="0" max="1" step=".05" value={player.volume} onChange={event => player.changeVolume(Number(event.target.value))} aria-valuetext={`${Math.round(player.volume * 100)} percent`} />
+      </label>
+      <span className="roll-play-position" role="status" aria-live="off" data-testid={`${testId}-position`}>{!player.active ? `Ready · ${bars} bars` : player.beat === null ? 'Starting…' : player.beat >= bars * 4 ? 'Letting the sound fade…' : `Bar ${Math.floor(player.beat / 4) + 1} · Beat ${Math.floor(player.beat % 4) + 1}`}</span>
+    </div>
+    <p className="roll-sound-note">Soft, felt-style piano modeled in your browser. Plays this roll only, including its rests; playing another roll stops this one. BPM means beats per minute.</p>
+    {player.error && <p className="roll-player-error" role="alert">{player.error}</p>}
+    <div ref={region} className="viz viz-scroll piano-roll-region" role="region" aria-label={`${title} — scrollable piano roll`} tabIndex={0} data-testid={testId} dangerouslySetInnerHTML={{ __html: svg }} />
     <details className="roll-note-list" data-testid={`${testId}-note-list`}>
       <summary>Read the exact notes and timing as a list</summary>
       <div className="note-table-scroll" role="region" aria-label={`${title} note list`} tabIndex={0}>

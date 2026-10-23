@@ -127,7 +127,7 @@ export function pianoRollSvg(events: Event[], bars = 8, title = 'Piano roll', re
     if (w >= 48) s += `<text x="${x + 7}" y="${y + h / 2}" dominant-baseline="middle" fill="#10151c" font-family="Space Mono,monospace" font-size="12" font-weight="700" pointer-events="none">${name}</text>`;
     s += '</g>';
   }
-  return s+'</svg>';
+  return s+`<line data-playhead="true" x1="${left}" x2="${left}" y1="36" y2="${bottom}" stroke="#fff0cc" stroke-width="2" visibility="hidden" pointer-events="none" aria-hidden="true"/></svg>`;
 }
 function staffPos(midi:number):[number,string]{const nat:[string,number][]=[['C',0],['D',-1],['D',0],['E',-1],['E',0],['F',0],['G',-1],['G',0],['A',-1],['A',0],['B',-1],['B',0]];const [letter,acc]=nat[((midi%12)+12)%12],li='CDEFGAB'.indexOf(letter),oct=Math.floor(midi/12)-1;return [oct*7+li-(4*7+2),acc===-1?'♭':''];}
 export function staffSvg(pairs:Dyad[]){
