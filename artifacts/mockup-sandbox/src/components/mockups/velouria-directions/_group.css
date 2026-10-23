@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+.velouria-preview {
+  min-height: 100vh;
+  font-family: 'Figtree', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
