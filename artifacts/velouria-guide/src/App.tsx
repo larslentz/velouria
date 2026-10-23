@@ -11,7 +11,7 @@ import { EnvironmentTextures } from './EnvironmentTextures';
 const BASE = import.meta.env.BASE_URL;
 const heroImage = `${BASE}images/velouria-hero.webp`;
 const definitionImage = `${BASE}images/velouria-definition.webp`;
-const tabs = ['Foundation', 'Sincere Fragment', 'Transformations', 'Sound Design', 'Environment'];
+const tabs = ['Foundation', 'Sincere Fragment', 'Transformations', 'Sound Design', 'Environment', 'Music to Study'];
 
 function Heading({ number, title, children }: { number: string; title: string; children: string }) {
   return <header className="section-heading"><span className="section-index">{number}</span><div><h2>{title}</h2><p>{children}</p></div></header>;
@@ -212,6 +212,27 @@ function App() {
           </div>
           <EnvironmentTextures />
           <div className="note" data-testid="note-environment">The goal is an ambiguous location, not a sound-effects scene. A trace of air, rain, or distant machinery can make silence feel inhabited.</div>
+        </>}
+        {tab === 5 && <>
+          <Heading number="06" title="Music to Study">Use this playlist as a listening companion while exploring the guide. Notice one quality at a time: suspended harmony, a memorable melodic fragment, space between phrases, or textures sitting behind the main musical idea. You do not need to identify every note; listen for the feeling and how the layers work together.</Heading>
+          <article className="surface music-study-card" data-testid="music-study-playlist">
+            <div className="kicker">Curated listening</div>
+            <h3>Velouria on Spotify</h3>
+            <p>The playlist is a reference for exploration, not a required sequence or set of rules. Choose a track, listen for one detail, then return to the guide and try your own version.</p>
+            <iframe
+              data-testid="embed-iframe"
+              title="Velouria playlist on Spotify"
+              style={{ borderRadius: '12px', display: 'block' }}
+              src="https://open.spotify.com/embed/playlist/5xjEx6AgGrcJPSMzZmnx5B?utm_source=generator&amp;theme=0&amp;si=9ea7aab455d3465a"
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+            <p className="music-study-link"><a href="https://open.spotify.com/playlist/5xjEx6AgGrcJPSMzZmnx5B?si=jcDzYDDxTeupxhXb7HAacQ" target="_blank" rel="noopener noreferrer">Open the Velouria playlist in Spotify</a> if you prefer listening there.</p>
+          </article>
         </>}
       </section>
       <footer className="footer">A COMPOSITION HANDBOOK · FELT-STYLE PIANO PREVIEWS + MIDI DOWNLOADS · USE THE DIAGRAMS AS WRITING PROMPTS · ARTWORK BY LARS LENTZ</footer>
