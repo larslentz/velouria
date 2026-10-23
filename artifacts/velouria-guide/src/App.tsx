@@ -84,8 +84,9 @@ function App() {
       <section className="tab-content" role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} key={`${tab}-${key}`} data-testid={`content-module-${tab + 1}`}>
         {tab === 0 && <>
           <Heading number="01" title="Start with two notes">Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. This small downward movement makes the gentle “sigh” used throughout the guide. Two notes played together are called a dyad.</Heading>
-          <div className="learning-note" data-testid="foundation-interval-explanation">
-            <h3>What does “P4 settles to M3” actually mean?</h3>
+          <details className="learning-note" data-testid="foundation-interval-explanation">
+            <summary>Optional: the music theory behind the sigh</summary>
+            <p>Musicians call this movement a <strong>perfect fourth settling to a major third</strong>, sometimes shortened to <strong>P4 → M3</strong>. Here is what those names mean.</p>
             <p>An <strong>interval</strong> is the distance between two notes. A <strong>semitone</strong> is one step to the next piano key, counting both black and white keys. A whole step is two semitone steps.</p>
             <ul>
               <li><strong>P4 = perfect fourth:</strong> the upper note is 5 semitone steps above the lower note.</li>
@@ -93,7 +94,7 @@ function App() {
               <li><strong>“Settles” describes the effect:</strong> lower the upper note by one semitone while holding the lower note still. The gap narrows from 5 steps to 4. In this musical setting, it can sound like a small release of tension.</li>
             </ul>
             <p>You do not need to memorize those names to try it. Use the exact notes below, and count four steady beats per bar (one group of 1–2–3–4).</p>
-          </div>
+          </details>
           <div className="grid-two">
             {pairs.map((pair, i) => <div className="surface" key={pair.label} data-testid={`card-dyad-pair-${i + 1}`}>
               <div className="stat-label">BAR {i + 1} · {i === 0 ? 'TRY THE FIRST SIGH' : 'REPEAT TWO KEYS HIGHER'}</div>
