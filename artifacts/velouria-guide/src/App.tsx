@@ -85,7 +85,7 @@ function App() {
         {tab === 0 && <>
           <Heading number="01" title="Start with two notes">Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. This small downward movement makes the gentle “sigh” used throughout the guide. Two notes played together are called a dyad.</Heading>
           <details className="learning-note" data-testid="foundation-interval-explanation">
-            <summary>Optional: the music theory behind the sigh</summary>
+            <summary>The music theory behind the sigh</summary>
             <p>Musicians call this movement a <strong>perfect fourth settling to a major third</strong>, sometimes shortened to <strong>P4 → M3</strong>. Here is what those names mean.</p>
             <p>An <strong>interval</strong> is the distance between two notes. A <strong>semitone</strong> is one step to the next piano key, counting both black and white keys. A whole step is two semitone steps.</p>
             <ul>
@@ -108,7 +108,7 @@ function App() {
               <p>The lower note is the <strong>bass</strong>. The gap above it changes from a perfect fourth (5 steps) to a major third (4 steps).</p>
             </div>)}
           </div>
-          <details className="learning-note staff-explanation"><summary>Optional: see the same two-note movement as sheet music</summary>
+          <details className="learning-note staff-explanation"><summary>See the same two-note movement as sheet music</summary>
           <p>The five horizontal lines are a staff. Notes higher on the staff sound higher. This is the same example as the piano roll below, not an extra exercise; you can skip it if you do not read music.</p>
           <Viz svg={staffSvg(pairs)} label="diagram-dyad-staff" />
           </details>
