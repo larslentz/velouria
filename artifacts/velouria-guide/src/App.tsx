@@ -107,7 +107,7 @@ function App() {
       </div>
       <section className="tab-content" role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} key={`${tab}-${key}`} data-testid={`content-module-${tab + 1}`}>
         {tab === 0 && <>
-          <Heading number="01" title="Start with two notes">These two-note sighs show Harmonic Suspension in miniature: a small change that eases some tension without making the whole piece feel finished. Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. Two notes played together are called a dyad.</Heading>
+          <Heading number="01" title="Start with two notes">Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. In this guide, that gentle downward settling is called a “sigh.” Two notes played together are called a dyad. This small sigh is Harmonic Suspension in miniature: it eases some tension without making the whole piece feel finished.</Heading>
           <div className="note" data-testid="foundation-exercise-role"><strong>Start with this as a short practice exercise, not a pattern you must play throughout the piece.</strong> Repeat the two bars a few times by themselves. Later in this tab, the eight-bar chord sequence becomes your accompaniment, with the Sincere Fragment melody played above it. <a href="#arrangement-plan">See the complete playing order and bar-by-bar plan below.</a></div>
           <details className="learning-note" data-testid="foundation-interval-explanation">
             <summary>The music theory behind the sigh</summary>
