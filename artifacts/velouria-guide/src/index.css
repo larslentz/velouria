@@ -32,7 +32,7 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .hero::before { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(0deg,var(--night) 0%,transparent 35%),linear-gradient(90deg,rgba(9,13,17,.93) 0%,rgba(12,17,22,.76) 48%,rgba(12,17,22,.1) 100%); }
 .hero-top { display:flex; justify-content:space-between; align-items:flex-start; }
 .hero-credit { display:flex; flex-direction:column; align-items:flex-end; gap:8px; }
-.hero-credit-kicker { color:var(--gold); font:10px 'Space Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
+.hero-credit-label { display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
 .hero-credit-link { color:#d3c7a9; font-size:12px; text-decoration:underline; text-underline-offset:3px; }
 .hero-credit-link:hover { color:var(--gold-bright); }
 .wordmark,.dict-label,.mono,.kicker,.stat-label,.tab-num,.caption-mono { font-family:'Space Mono',monospace; letter-spacing:.12em; text-transform:uppercase; }
