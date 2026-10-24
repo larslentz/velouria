@@ -53,6 +53,7 @@ export function PianoRoll({ events, bars, title, testId, restBars = [] }: Props)
         Stacked blocks are played together.</p>
       <p className="roll-reading-tip"><strong>Count 1–2–3–4 in each bar.</strong> The note number tells you its octave (pitch range): C4 is middle C; C5 is one octave higher. ♭ means “flat,” one key below the named note. Scroll sideways on smaller screens; the notes stay full-size.</p>
       {events.some(event => event.interval) && <p className="roll-reading-tip" data-testid={`${testId}-interval-key`}><strong>Interval labels:</strong> P4 means perfect fourth; M3 means major third. They are shown beside the upper note names.</p>}
+      {events.some(event => event.chordName) && <p className="roll-reading-tip" data-testid={`${testId}-chord-key`}><strong>Chord names:</strong> Each label in the CHORD row matches the group of notes directly below it.</p>}
     </figcaption>
     <PlaybackControls player={player} title={title} testId={testId} bars={bars} disabled={!events.length} midiTracks={[{ name: title, events }]} />
     <p className="roll-sound-note">Soft, felt-style piano modeled in your browser. Plays this roll only, including its rests; starting another roll or the combined arrangement stops this one. BPM means beats per minute.</p>

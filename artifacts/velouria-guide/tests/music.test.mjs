@@ -9,7 +9,7 @@ function examples(key) {
   return [
     { events: dyadSighEvents(key), bars: 2 },
     { events: expandedProgression(key).flatMap(chord => chord.notes.map(pitch => ({
-      pitch, start: chord.start, duration: chord.duration, label: chord.label,
+      pitch, start: chord.start, duration: chord.duration, label: chord.label, chordName: chord.label,
     }))), bars: 8 },
     { events: melodyEvents(key), bars: 8 },
     ...VARIATIONS.map(v => ({ events: variationEvents(key, v.kind), bars: 8 })),
@@ -54,6 +54,28 @@ test('dyad piano roll shows interval tags beside the upper-note names in every k
       assert.ok(svg.includes(`>${pitchName(event.pitch)}</text>`), 'keep the note name visible next to its interval tag');
     }
     assert.match(svg, /P4 means perfect fourth; M3 means major third/);
+  }
+});
+
+test('progression piano roll labels each chord span in every key', () => {
+  for (const key of KEYS) {
+    const chords = expandedProgression(key);
+    const events = chords.flatMap(chord => chord.notes.map(pitch => ({
+      pitch, start: chord.start, duration: chord.duration, label: chord.label, chordName: chord.label,
+    })));
+    const layout = pianoRollLayout(events, 8);
+    const svg = pianoRollSvg(events, 8);
+    const chordTags = [...svg.matchAll(/<g class="piano-roll-chord-label">/g)];
+
+    assert.equal(layout.top, 88, 'reserve a row for chord names above the note grid');
+    assert.equal(chordTags.length, chords.length);
+    for (const chord of chords) {
+      assert.ok(svg.includes(`>${chord.label}</text>`), `${chord.label} should appear as a chart label`);
+      const spanLabel = chord.bars.includes('–') ? `bars ${chord.bars}` : `bar ${chord.bars}`;
+      assert.ok(svg.includes(`${chord.label} · ${spanLabel}`), `${chord.label} should be aligned with its bar span`);
+    }
+    assert.match(svg, /CHORD/);
+    assert.match(svg, /Chord names appear above the notes they describe/);
   }
 });
 

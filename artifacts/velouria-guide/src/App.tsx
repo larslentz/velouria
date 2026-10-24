@@ -36,7 +36,7 @@ function App() {
   const currentVariation = VARIATIONS[variation];
   const dyadEvents = dyadSighEvents(key);
   const progressionEvents = progressive.flatMap(chord => chord.notes.map(pitch => ({
-    start: chord.start, duration: chord.duration, pitch, label: `${chord.label} · bars ${chord.bars}`,
+    start: chord.start, duration: chord.duration, pitch, label: `${chord.label} · bars ${chord.bars}`, chordName: chord.label,
   })));
 
   return <div className="site-shell">

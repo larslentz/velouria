@@ -7,6 +7,7 @@ export type Event = {
   label: string;
   color?: string;
   interval?: { abbreviation: string; name: string };
+  chordName?: string;
 };
 export type Dyad = { label: string; start: number[]; rest: number[]; relation: string };
 export const pitchName = (midi: number) => `${KEYS[((midi % 12) + 12) % 12]}${Math.floor(midi / 12) - 1}`;
@@ -106,7 +107,7 @@ export function pianoRollLayout(events: Event[], bars: number) {
   const pitches = events.map(event => event.pitch);
   const min = Math.max(0, (pitches.length ? Math.min(...pitches) : 60) - 2);
   const max = Math.min(127, (pitches.length ? Math.max(...pitches) : 72) + 2);
-  const left = 80, right = 20, top = 64, rowHeight = 28;
+  const left = 80, right = 20, top = events.some(event => event.chordName) ? 88 : 64, rowHeight = 28;
   const width = Math.max(920, left + right + bars * 4 * 40);
   const gridHeight = (max - min + 1) * rowHeight;
   return { min, max, left, top, rowHeight, width, gridHeight,
@@ -118,8 +119,25 @@ export function pianoRollSvg(events: Event[], bars = 8, title = 'Piano roll', re
   const end = left + bars * 4 * beatWidth;
   const usedPitches = new Set(events.map(event => event.pitch));
   const hasIntervals = events.some(event => event.interval);
+  const chordLabels = [...new Map(events.filter(event => event.chordName).map(event => [
+    `${event.start}-${event.duration}-${event.chordName}`,
+    { start: event.start, duration: event.duration, name: event.chordName! },
+  ])).values()];
+  const hasChordLabels = chordLabels.length > 0;
+  const beatLabelY = top - 14;
   const intervalDescription = hasIntervals ? ' Interval tags beside note names: P4 means perfect fourth; M3 means major third.' : '';
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" class="piano-roll-svg" style="min-width:${width}px" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}"><desc>Time moves left to right. Each bar has four beats. Each labeled row is one piano key; higher notes are above lower notes. Gold blocks show the exact start and duration of each note. A text note list is available below the diagram.${intervalDescription}</desc><rect width="100%" height="100%" rx="12" fill="#111821"/><text x="12" y="50" fill="#aebbc8" font-family="Space Mono,monospace" font-size="12">NOTE</text>`;
+  const chordDescription = hasChordLabels ? ' Chord names appear above the notes they describe.' : '';
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" class="piano-roll-svg" style="min-width:${width}px" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}"><desc>Time moves left to right. Each bar has four beats. Each labeled row is one piano key; higher notes are above lower notes. Gold blocks show the exact start and duration of each note. A text note list is available below the diagram.${intervalDescription}${chordDescription}</desc><rect width="100%" height="100%" rx="12" fill="#111821"/><text x="12" y="${beatLabelY}" fill="#aebbc8" font-family="Space Mono,monospace" font-size="12">NOTE</text>`;
+  if (hasChordLabels) s += `<text x="12" y="${top - 38}" fill="#aebbc8" font-family="Space Mono,monospace" font-size="11">CHORD</text>`;
+  for (const chord of chordLabels) {
+    const x = left + chord.start * beatWidth;
+    const chordWidth = chord.duration * beatWidth;
+    const tagY = top - 58;
+    const firstBar = Math.floor(chord.start / 4) + 1;
+    const lastBar = Math.ceil((chord.start + chord.duration) / 4);
+    const barLabel = firstBar === lastBar ? `bar ${firstBar}` : `bars ${firstBar}–${lastBar}`;
+    s += `<g class="piano-roll-chord-label"><title>${esc(chord.name)} · ${barLabel}</title><rect x="${x + 4}" y="${tagY}" width="${chordWidth - 8}" height="22" rx="4" fill="#26333e" stroke="#71808b" stroke-width=".8"/><text x="${x + chordWidth / 2}" y="${tagY + 11}" text-anchor="middle" dominant-baseline="middle" fill="#f1d79e" font-family="Space Mono,monospace" font-size="12" font-weight="700">${esc(chord.name)}</text></g>`;
+  }
   for (let pitch = max; pitch >= min; pitch--) {
     const y = top + (max - pitch) * rowHeight;
     const blackKey = [1, 3, 6, 8, 10].includes(pitch % 12);
@@ -131,7 +149,7 @@ export function pianoRollSvg(events: Event[], bars = 8, title = 'Piano roll', re
     if (restBars.includes(bar)) s += `<rect x="${x}" y="${top}" width="${4 * beatWidth}" height="${gridHeight}" fill="#a9c4ce" fill-opacity=".07"/><text x="${x + 2 * beatWidth}" y="${bottom + 24}" text-anchor="middle" fill="#b8c9cd" font-family="Figtree,sans-serif" font-size="13">Rest — no notes</text>`;
     for (let beat = 0; beat < 4; beat++) {
       const beatX = x + beat * beatWidth;
-      s += `<text x="${beatX + 8}" y="48" fill="#b7c4d0" font-family="Space Mono,monospace" font-size="12">${beat + 1}</text><line x1="${beatX}" y1="${top}" x2="${beatX}" y2="${bottom}" stroke="${beat === 0 ? '#7f909f' : '#3e4d5b'}" stroke-width="${beat === 0 ? 1.5 : .7}"/>`;
+      s += `<text x="${beatX + 8}" y="${beatLabelY}" fill="#b7c4d0" font-family="Space Mono,monospace" font-size="12">${beat + 1}</text><line x1="${beatX}" y1="${top}" x2="${beatX}" y2="${bottom}" stroke="${beat === 0 ? '#7f909f' : '#3e4d5b'}" stroke-width="${beat === 0 ? 1.5 : .7}"/>`;
     }
   }
   s += `<line x1="${end}" y1="${top}" x2="${end}" y2="${bottom}" stroke="#7f909f"/>`;
@@ -148,7 +166,7 @@ export function pianoRollSvg(events: Event[], bars = 8, title = 'Piano roll', re
     if (event.interval && w >= 86) s += `<text x="${x + 51}" y="${y + h / 2}" dominant-baseline="middle" fill="#594824" font-family="Space Mono,monospace" font-size="11" font-weight="700" pointer-events="none">${esc(event.interval.abbreviation)}</text>`;
     s += '</g>';
   }
-  return s+`<line data-playhead="true" x1="${left}" x2="${left}" y1="36" y2="${bottom}" stroke="#fff0cc" stroke-width="2" visibility="hidden" pointer-events="none" aria-hidden="true"/></svg>`;
+  return s+`<line data-playhead="true" x1="${left}" x2="${left}" y1="${top - 28}" y2="${bottom}" stroke="#fff0cc" stroke-width="2" visibility="hidden" pointer-events="none" aria-hidden="true"/></svg>`;
 }
 function staffPos(midi:number):[number,string]{const nat:[string,number][]=[['C',0],['D',-1],['D',0],['E',-1],['E',0],['F',0],['G',-1],['G',0],['A',-1],['A',0],['B',-1],['B',0]];const [letter,acc]=nat[((midi%12)+12)%12],li='CDEFGAB'.indexOf(letter),oct=Math.floor(midi/12)-1;return [oct*7+li-(4*7+2),acc===-1?'♭':''];}
 export function staffSvg(pairs:Dyad[]){
