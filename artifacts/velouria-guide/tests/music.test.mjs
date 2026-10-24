@@ -127,7 +127,12 @@ test('warm arpeggio uses only notes of the stated flat-six major-seventh chord',
 test('ghost entrance and late breath have their stated one-beat and half-beat offsets', () => {
   for (const key of KEYS) {
     assert.equal(variationEvents(key, 'ghost')[0].start, 1);
-    assert.equal(variationEvents(key, 'late')[0].start, .5);
+    const original = melodyEvents(key);
+    const late = variationEvents(key, 'late');
+    assert.equal(late.length, original.length);
+    assert.deepEqual(late.map(note => note.start), original.map(note => note.start + .5));
+    assert.deepEqual(late.map(({ pitch, duration }) => ({ pitch, duration })),
+      original.map(({ pitch, duration }) => ({ pitch, duration })));
   }
 });
 

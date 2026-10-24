@@ -9,9 +9,10 @@ type Props = {
   title: string;
   testId: string;
   restBars?: number[];
+  together?: boolean;
 };
 
-export function PianoRoll({ events, bars, title, testId, restBars = [] }: Props) {
+export function PianoRoll({ events, bars, title, testId, restBars = [], together = false }: Props) {
   const player = usePianoPlayback(events, bars);
   const region = useRef<HTMLDivElement>(null);
   const restKey = restBars.join(',');
@@ -55,7 +56,7 @@ export function PianoRoll({ events, bars, title, testId, restBars = [] }: Props)
       {events.some(event => event.interval) && <p className="roll-reading-tip" data-testid={`${testId}-interval-key`}><strong>Interval labels:</strong> P4 means perfect fourth; M3 means major third. They are shown beside the upper note names.</p>}
       {events.some(event => event.chordName) && <p className="roll-reading-tip" data-testid={`${testId}-chord-key`}><strong>Chord names:</strong> Each label in the CHORD row matches the group of notes directly below it.</p>}
     </figcaption>
-    <PlaybackControls player={player} title={title} testId={testId} bars={bars} disabled={!events.length} midiTracks={[{ name: title, events }]} />
+    <PlaybackControls player={player} title={title} testId={testId} bars={bars} disabled={!events.length} together={together} midiTracks={[{ name: title, events }]} />
     <p className="roll-sound-note">Soft, felt-style piano modeled in your browser. Plays this roll only, including its rests; starting another roll or the combined arrangement stops this one. BPM means beats per minute.</p>
     <p className="roll-sound-note"><strong>Download MIDI</strong> saves this roll’s notes, timing, rests, selected key and tempo. Import the .mid file into your music software and choose a felt-piano instrument there. MIDI contains playing instructions, not recorded audio; the preview sound and volume setting are not included.</p>
     <div ref={region} className="viz viz-scroll piano-roll-region" role="region" aria-label={`${title} — scrollable piano roll`} tabIndex={0} data-testid={testId} dangerouslySetInnerHTML={{ __html: svg }} />

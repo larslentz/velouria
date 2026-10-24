@@ -48,13 +48,17 @@ export function melodyEvents(key: string): Event[] {
   ];
 }
 // Both parts share the same section beats: no introduction or repeated attacks.
-export function combinedArrangementEvents(key: string): Event[] {
+export function combinedArrangementEvents(
+  key: string,
+  melody: Event[] = melodyEvents(key),
+  melodyLabel = 'Sincere Fragment',
+): Event[] {
   return [
     ...expandedProgression(key).flatMap(chord => chord.notes.map(pitch => ({
       start: chord.start, duration: chord.duration, pitch,
-      label: `Foundation · ${chord.label}`,
+      label: `Foundation · ${chord.label}`, chordName: chord.label,
     }))),
-    ...melodyEvents(key).map(note => ({ ...note, label: `Sincere Fragment · ${note.label}` })),
+    ...melody.map(note => ({ ...note, label: `${melodyLabel} · ${note.label}` })),
   ];
 }
 export function arrangementPlan(key: string) {
@@ -96,7 +100,7 @@ export function variationEvents(key: string, kind: string): Event[] {
     { start: 4, duration: 1.5, pitch: r + 26, label: 'question' }, { start: 6, duration: 1.5, pitch: r + 24, label: 'sigh' },
     { start: 8, duration: 3, pitch: r + 21, label: 'Dorian 6th' },
   ];
-  if (kind === 'late') return phrase.map(e => ({ ...e, start: e.start + .5 }));
+  if (kind === 'late') return melodyEvents(key).map(e => ({ ...e, start: e.start + .5 }));
   if (kind === 'drone') return [
     { start: 0, duration: 32, pitch: r - 12, label: 'stationary root' }, { start: 0, duration: 32, pitch: r - 5, label: 'open fifth' }, ...phrase,
   ];

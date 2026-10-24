@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  KEYS, VARIATIONS, dyadPairs, dyadSighEvents, expandedProgression, keyRootMidi, melodyEvents,
+  KEYS, VARIATIONS, combinedArrangementEvents, dyadPairs, dyadSighEvents, expandedProgression, keyRootMidi, melodyEvents,
   mixMatrixSvg, pitchName, staffSvg, variationEvents,
 } from './music';
 import { PianoRoll } from './PianoRoll';
@@ -35,6 +35,7 @@ function App() {
   const progressive = expandedProgression(key);
   const currentVariation = VARIATIONS[variation];
   const dyadEvents = dyadSighEvents(key);
+  const lateBreathArrangement = combinedArrangementEvents(key, variationEvents(key, 'late'), 'Late Breath');
   const progressionEvents = progressive.flatMap(chord => chord.notes.map(pitch => ({
     start: chord.start, duration: chord.duration, pitch, label: `${chord.label} · bars ${chord.bars}`, chordName: chord.label,
   })));
@@ -165,7 +166,7 @@ function App() {
           <ArrangementGuide tonalKey={key} />
         </>}
         {tab === 1 && <>
-          <Heading number="02" title="The sincere fragment">A melody is a sequence of single notes; a motif is a short, recognizable pattern within it. This three-note descent is the Sincere Fragment: simple, unhurried, and expressive. Its quiet bars are intentional breathing room, not missing notes. On a later repeat, try the optional Late Breath transformation: delay the melody by half a beat while Foundation keeps its steady timing.</Heading>
+          <Heading number="02" title="The sincere fragment">A melody is a sequence of single notes; a motif is a short, recognizable pattern within it. This three-note descent is the Sincere Fragment: simple, unhurried, and expressive. Its quiet bars are intentional breathing room, not missing notes. On a later repeat, try Late Breath: move each melody note half a beat later while Foundation keeps its original timing. A playable example appears at the end of this section.</Heading>
           <div className="learning-note" data-testid="melody-accompaniment-guidance">
             <h3>When does this melody come in?</h3>
             <p><strong>Play it over Foundation’s eight-bar chord sequence, not after the chords stop.</strong> For a simple start, play the chords alone for eight bars. Then restart the chord sequence and begin this melody at the same instant: beat 1 of the new cycle (bar 9 of the piece).</p>
@@ -183,6 +184,12 @@ function App() {
           <CombinedArrangementPlayer tonalKey={key} />
           <div className="note" data-testid="note-melody-rest"><b>Bars 3–6 are intentionally empty for the melody only.</b> Keep Foundation’s accompaniment going: hold the ♭VImaj7 chord through bars 3–4, then the ♭IImaj7 chord through bars 5–6. Play no new melody notes in those bars. The three-note melody returns in bars 7–8 while the accompaniment changes underneath it.</div>
           <div className="note" data-testid="melody-recorded-sources"><strong>A recorded phrase can be the sincere fragment.</strong> Instead of playing piano, use a short cello, violin, other orchestral, or tape-recorded phrase. To follow this example, select or edit recorded notes to match the three descending pitches and timing in the roll. Place them in bars 1–2 and 7–8, leaving bars 3–6 without new melody notes. Because the recording carries the recognizable melody, it is the fragment itself—not just background texture.</div>
+          <section className="learning-note" data-testid="late-breath-example">
+            <h3>Late Breath: let the melody arrive halfway between beats</h3>
+            <p>Count “1-and-2-and-3-and-4-and” evenly; each “and” falls halfway between numbered beats. In the original phrase, the melody starts on beats 1 and 3 of bar 1, then beat 1 of bar 2. For Late Breath, play each note on the “and” after that beat. Repeat the same shift in bars 7–8.</p>
+            <p><strong>Keep Foundation unchanged.</strong> Its chord stacks still begin on their original beats. In the combined piano roll below, those lower stacks are the accompaniment and the higher notes are the delayed melody. Press <strong>Play together</strong> to hear the difference.</p>
+          </section>
+          <PianoRoll events={lateBreathArrangement} bars={8} title={`Foundation + Late Breath · ${key} minor`} testId="diagram-late-breath-with-foundation" together />
         </>}
         {tab === 2 && <>
           <Heading number="03" title="Variations & transformations">Transformations let the Sincere Fragment change while remaining recognizable. Keep Foundation’s eight-bar harmony underneath, then try moving the melody’s start time, playing it higher or lower, or holding a note longer. Choose one example below and compare its note list with the original three-note melody.</Heading>

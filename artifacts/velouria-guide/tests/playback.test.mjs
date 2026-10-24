@@ -68,3 +68,24 @@ test('combined arrangement shares exact chord/melody timing in every key and tem
     }
   }
 });
+
+test('Late Breath plays over unchanged Foundation chords throughout the full eight-bar cycle', () => {
+  for (const key of KEYS) {
+    const lateMelody = variationEvents(key, 'late');
+    const events = combinedArrangementEvents(key, lateMelody, 'Late Breath');
+    const harmony = events.filter(note => note.label.startsWith('Foundation'));
+    const melody = events.filter(note => note.label.startsWith('Late Breath'));
+    const timing = ({ start, duration, pitch }) => ({ start, duration, pitch });
+    const chords = expandedProgression(key).flatMap(chord => chord.notes.map(pitch => ({
+      start: chord.start, duration: chord.duration, pitch,
+    })));
+
+    assert.deepEqual(harmony.map(timing), chords);
+    assert.deepEqual(melody.map(timing), lateMelody.map(timing));
+    assert.equal(melody.length, 6, 'both melody phrases are delayed');
+    for (const bar of [2, 3, 4, 5]) {
+      assert.ok(!melody.some(note => note.start < (bar + 1) * 4 && note.start + note.duration > bar * 4));
+      assert.ok(harmony.some(note => note.start <= bar * 4 && note.start + note.duration >= (bar + 1) * 4));
+    }
+  }
+});
