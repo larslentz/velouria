@@ -49,6 +49,7 @@ function App() {
           <div className="pronunciation">Ve·lou·ri·a /vəˈlʊər.i.ə/ · noun</div>
         </div>
         <div className="hero-credit">
+          <div className="hero-credit-kicker">A COMPOSITIONAL GUIDE</div>
           <div className="dict-label">BY LARS LENTZ</div>
           <a className="hero-credit-link" href="https://sleek.bio/larslentz" target="_blank" rel="noopener noreferrer">More by Lars</a>
         </div>
