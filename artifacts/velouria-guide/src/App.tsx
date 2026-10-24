@@ -278,20 +278,22 @@ function App() {
               loading="lazy"
             />
             <p className="music-study-link"><a href="https://open.spotify.com/playlist/5xjEx6AgGrcJPSMzZmnx5B?si=jcDzYDDxTeupxhXb7HAacQ" target="_blank" rel="noopener noreferrer">Open the Velouria playlist in Spotify</a> if you prefer listening there.</p>
-            <h3>YouTube playlist</h3>
-            <p>Explore the Velouria playlist on YouTube as another listening companion.</p>
-            <iframe
-              title="Velouria playlist on YouTube"
-              style={{ borderRadius: '12px', display: 'block', width: '100%', aspectRatio: '16 / 9' }}
-              src="https://www.youtube.com/embed/videoseries?si=wOSCczuWkxSmreGK&amp;list=PLEv8rUxoqBOU"
-              height="315"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              loading="lazy"
-            />
-            <p className="music-study-link"><a href="https://youtube.com/playlist?list=PLEv8rUxoqBOU&amp;si=nNRT2AAPx3vDZHCN" target="_blank" rel="noopener noreferrer">Open the Velouria playlist on YouTube</a> if you prefer listening there.</p>
+            <div className="music-study-youtube">
+              <h3>Velouria on YouTube</h3>
+              <p>Explore the Velouria playlist on YouTube as another listening companion.</p>
+              <iframe
+                title="Velouria playlist on YouTube"
+                style={{ borderRadius: '12px', display: 'block', width: '100%', aspectRatio: '16 / 9' }}
+                src="https://www.youtube.com/embed/videoseries?si=wOSCczuWkxSmreGK&amp;list=PLEv8rUxoqBOU"
+                height="315"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                loading="lazy"
+              />
+              <p className="music-study-link"><a href="https://youtube.com/playlist?list=PLEv8rUxoqBOU&amp;si=nNRT2AAPx3vDZHCN" target="_blank" rel="noopener noreferrer">Open the Velouria playlist on YouTube</a> if you prefer listening there.</p>
+            </div>
           </article>
         </>}
       </section>
