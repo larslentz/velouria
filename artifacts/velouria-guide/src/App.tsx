@@ -326,13 +326,14 @@ function App() {
               data-testid="embed-iframe"
               title="Velouria playlist on Spotify"
               style={{ borderRadius: '12px', display: 'block' }}
-              src="https://open.spotify.com/embed/playlist/5xjEx6AgGrcJPSMzZmnx5B?utm_source=generator&amp;theme=0&amp;si=9ea7aab455d3465a"
+              src="https://open.spotify.com/embed/playlist/5xjEx6AgGrcJPSMzZmnx5B?utm_source=generator&amp;theme=0"
               width="100%"
               height="352"
               frameBorder="0"
               allowFullScreen
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              loading="eager"
             />
             <p className="music-study-link"><a href="https://open.spotify.com/playlist/5xjEx6AgGrcJPSMzZmnx5B?si=jcDzYDDxTeupxhXb7HAacQ" target="_blank" rel="noopener noreferrer">Open the Velouria playlist in Spotify</a> if you prefer listening there.</p>
             <div className="music-study-youtube">
