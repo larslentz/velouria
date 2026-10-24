@@ -41,6 +41,22 @@ test('dyad timing matches the instructions: bass held four beats, top changes on
   }
 });
 
+test('dyad piano roll shows interval tags beside the upper-note names in every key', () => {
+  for (const key of KEYS) {
+    const events = dyadSighEvents(key);
+    const svg = pianoRollSvg(events, 2);
+    const markedNotes = events.filter(event => event.interval);
+
+    assert.deepEqual(markedNotes.map(event => event.interval.abbreviation), ['P4', 'M3', 'P4', 'M3']);
+    for (const event of markedNotes) {
+      assert.ok(svg.includes(`>${event.interval.abbreviation}</text>`));
+      assert.ok(svg.includes(`${event.interval.name} (${event.interval.abbreviation})`));
+      assert.ok(svg.includes(`>${pitchName(event.pitch)}</text>`), 'keep the note name visible next to its interval tag');
+    }
+    assert.match(svg, /P4 means perfect fourth; M3 means major third/);
+  }
+});
+
 test('all rolls use readable 28px pitch rows and only the required pitch range', () => {
   for (const key of KEYS) for (const { events, bars } of examples(key)) {
     const layout = pianoRollLayout(events, bars);

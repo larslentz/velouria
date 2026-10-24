@@ -1,6 +1,13 @@
 export const KEYS = ['C', 'D♭', 'D', 'E♭', 'E', 'F', 'G♭', 'G', 'A♭', 'A', 'B♭', 'B'];
 const PC = Object.fromEntries(KEYS.map((key, i) => [key, i])) as Record<string, number>;
-export type Event = { start: number; duration: number; pitch: number; label: string; color?: string };
+export type Event = {
+  start: number;
+  duration: number;
+  pitch: number;
+  label: string;
+  color?: string;
+  interval?: { abbreviation: string; name: string };
+};
 export type Dyad = { label: string; start: number[]; rest: number[]; relation: string };
 export const pitchName = (midi: number) => `${KEYS[((midi % 12) + 12) % 12]}${Math.floor(midi / 12) - 1}`;
 export const keyRootMidi = (key: string) => 48 + (PC[key] ?? 8);
@@ -14,8 +21,8 @@ export function dyadPairs(key: string): Dyad[] {
 export function dyadSighEvents(key: string): Event[] {
   return dyadPairs(key).flatMap((pair, index) => [
     { start: index * 4, duration: 4, pitch: pair.start[1], label: 'Keep the lower note held for the whole bar' },
-    { start: index * 4, duration: 2, pitch: pair.start[0], label: 'Play the upper note on beat 1' },
-    { start: index * 4 + 2, duration: 2, pitch: pair.rest[0], label: 'On beat 3, move only the upper note one piano key lower' },
+    { start: index * 4, duration: 2, pitch: pair.start[0], label: 'Play the upper note on beat 1', interval: { abbreviation: 'P4', name: 'perfect fourth' } },
+    { start: index * 4 + 2, duration: 2, pitch: pair.rest[0], label: 'On beat 3, move only the upper note one piano key lower', interval: { abbreviation: 'M3', name: 'major third' } },
   ]);
 }
 export function expandedProgression(key: string) {
@@ -110,7 +117,9 @@ export function pianoRollSvg(events: Event[], bars = 8, title = 'Piano roll', re
   const { min, max, left, top, rowHeight, width, height, bottom, gridHeight, beatWidth } = pianoRollLayout(events, bars);
   const end = left + bars * 4 * beatWidth;
   const usedPitches = new Set(events.map(event => event.pitch));
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" class="piano-roll-svg" style="min-width:${width}px" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}"><desc>Time moves left to right. Each bar has four beats. Each labeled row is one piano key; higher notes are above lower notes. Gold blocks show the exact start and duration of each note. A text note list is available below the diagram.</desc><rect width="100%" height="100%" rx="12" fill="#111821"/><text x="12" y="50" fill="#aebbc8" font-family="Space Mono,monospace" font-size="12">NOTE</text>`;
+  const hasIntervals = events.some(event => event.interval);
+  const intervalDescription = hasIntervals ? ' Interval tags beside note names: P4 means perfect fourth; M3 means major third.' : '';
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" class="piano-roll-svg" style="min-width:${width}px" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}"><desc>Time moves left to right. Each bar has four beats. Each labeled row is one piano key; higher notes are above lower notes. Gold blocks show the exact start and duration of each note. A text note list is available below the diagram.${intervalDescription}</desc><rect width="100%" height="100%" rx="12" fill="#111821"/><text x="12" y="50" fill="#aebbc8" font-family="Space Mono,monospace" font-size="12">NOTE</text>`;
   for (let pitch = max; pitch >= min; pitch--) {
     const y = top + (max - pitch) * rowHeight;
     const blackKey = [1, 3, 6, 8, 10].includes(pitch % 12);
@@ -132,9 +141,11 @@ export function pianoRollSvg(events: Event[], bars = 8, title = 'Piano roll', re
     const x = left + start * beatWidth, y = top + (max - event.pitch) * rowHeight + 3;
     const w = (stop - start) * beatWidth, h = rowHeight - 6;
     const name = pitchName(event.pitch);
-    const description = `${name}: bar ${Math.floor(start / 4) + 1}, beat ${start % 4 + 1}; hold ${event.duration} beats. ${event.label}`;
+    const intervalText = event.interval ? ` Interval: ${event.interval.name} (${event.interval.abbreviation}).` : '';
+    const description = `${name}: bar ${Math.floor(start / 4) + 1}, beat ${start % 4 + 1}; hold ${event.duration} beats.${intervalText} ${event.label}`;
     s += `<g><title>${esc(description)}</title><rect class="piano-roll-note" data-pitch="${event.pitch}" data-start="${event.start}" data-duration="${event.duration}" x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="#dfbf7d" stroke="#f5d99f" stroke-width=".75"/>`;
     if (w >= 48) s += `<text x="${x + 7}" y="${y + h / 2}" dominant-baseline="middle" fill="#10151c" font-family="Space Mono,monospace" font-size="12" font-weight="700" pointer-events="none">${name}</text>`;
+    if (event.interval && w >= 86) s += `<text x="${x + 51}" y="${y + h / 2}" dominant-baseline="middle" fill="#594824" font-family="Space Mono,monospace" font-size="11" font-weight="700" pointer-events="none">${esc(event.interval.abbreviation)}</text>`;
     s += '</g>';
   }
   return s+`<line data-playhead="true" x1="${left}" x2="${left}" y1="36" y2="${bottom}" stroke="#fff0cc" stroke-width="2" visibility="hidden" pointer-events="none" aria-hidden="true"/></svg>`;
