@@ -1,6 +1,6 @@
 - [Preview routing checks](preview-routing.md) — a healthy standalone server can still be unreachable through an application-router preview.
 - [Decorative design scope](decorative-design.md) — Velouria ornament studies should retain the original fonts rather than redesign the typography.
-- [GitHub workflow pushes](github-workflow-pushes.md) — bypass Replit's OAuth URL rewrite when using a fine-grained token to push workflow files.
+- [GitHub publishing](github-workflow-pushes.md) — use direct transport for workflow files; leave ordinary content pushes and Pages publishing to the user.
 - [Beginner teaching](beginner-teaching.md) — explain theory terms before using them and pair them with readable, practical musical examples.
 - [Sound source roles](sound-source-roles.md) — keep texture sources broad; recordings can carry musical parts or sit behind them as atmosphere.
 - [Companion app](companion-app.md) — Beautiful Unease creates melodies and harmonies suitable as starting material for Velouria music.
