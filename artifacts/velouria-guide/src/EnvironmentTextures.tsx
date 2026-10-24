@@ -1,11 +1,11 @@
 export function LayerExamples() {
   return <>
     <div className="grid-three">
-      <article className="surface" data-testid="environment-dust">
+      <article className="surface" data-testid="environment-independent-texture">
         <div className="kicker">Instrument texture option</div>
-        <h3>SoundMorph Dust</h3>
-        <p>SoundMorph Dust is a standalone instrument that generates its own sound. In this arrangement, use it as a separate textural layer—not as an effect receiving the piano, recorded phrases, or their note endings.</p>
-        <p>Give Dust its own track in your music software. Choose a subtle texture, bring it in quietly beneath Foundation’s chords and the Sincere Fragment melody, and let it continue through the melody’s rests. Fade it in or out over a later eight-bar repeat rather than making it compete with every melodic note.</p>
+        <h3>A sound that stands on its own</h3>
+        <p>Some instruments generate their own sound rather than processing the piano or a recording. Put one on its own track as a quiet texture behind Foundation’s chords or the Sincere Fragment melody.</p>
+        <p>Choose a subtle tone, bring it in gently, and let it continue through the melody’s rests. Fade it in or out over a later eight-bar repeat rather than making it compete with every melodic note.</p>
         <p>Listen for space, movement, and grain rather than another lead melody. If the texture has a clear musical pitch, check that it fits the chords underneath it.</p>
       </article>
       <article className="surface" data-testid="environment-halo-loop-captures">
@@ -37,7 +37,7 @@ export function LayerExamples() {
         <li><strong>Transformations:</strong> change that recorded phrase’s timing, pitch, or ending to make a later variation. The recording carries the changed musical idea, not merely a decorative layer behind it.</li>
         <li><strong>Background texture:</strong> let a quiet recording add atmosphere behind those musical parts. It can continue while the melody rests, provided it does not obscure the harmony or the silence between phrases.</li>
       </ul>
-      <p><strong>Try one arrangement:</strong> use recorded string chords for Foundation’s first eight bars. On the next eight-bar cycle, bring in a recorded cello fragment at the same time as the returning chords. Add Dust quietly on a separate track, allowing it to continue through the melody’s rests. On a later repeat, try one transformation of the cello phrase. You do not need an additional piano part if the recordings already perform its musical roles.</p>
+      <p><strong>Try one arrangement:</strong> use recorded string chords for Foundation’s first eight bars. On the next eight-bar cycle, bring in a recorded cello fragment at the same time as the returning chords. Add an independent texture quietly on a separate track, allowing it to continue through the melody’s rests. On a later repeat, try one transformation of the cello phrase. You do not need an additional piano part if the recordings already perform its musical roles.</p>
     </section>
   </>;
 }

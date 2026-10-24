@@ -2,5 +2,5 @@
 - [Decorative design scope](decorative-design.md) — Velouria ornament studies should retain the original fonts rather than redesign the typography.
 - [GitHub workflow pushes](github-workflow-pushes.md) — bypass Replit's OAuth URL rewrite when using a fine-grained token to push workflow files.
 - [Beginner teaching](beginner-teaching.md) — explain theory terms before using them and pair them with readable, practical musical examples.
-- [Sound source roles](sound-source-roles.md) — Dust is an independent texture instrument; orchestral recordings and tape loops can carry musical parts or background atmosphere.
+- [Sound source roles](sound-source-roles.md) — keep texture sources broad; recordings can carry musical parts or sit behind them as atmosphere.
 - [Companion app](companion-app.md) — Beautiful Unease creates melodies and harmonies suitable as starting material for Velouria music.

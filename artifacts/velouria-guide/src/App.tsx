@@ -225,11 +225,62 @@ function App() {
             <p>Compare the original alone with both versions playing. Keep the copy subtle, or remove it if it blurs the melody. You can create distance with a separate pad or recording instead; there is no need to process every sound.</p>
           </section>
           <div className="note" data-testid="note-depth-arrangement">Depth is an arrangement decision as much as an effects decision: keep one close, legible source while the softer layers lose definition behind it. Try echo or granular processing on one short phrase or fading note first, rather than washing the whole mix; phrase endings are one option, not the only one.</div>
+          <section className="sound-reference" aria-labelledby="sound-reference-title" data-testid="sound-choice-quick-reference">
+            <div className="kicker">Quick reference</div>
+            <h3 id="sound-reference-title">Choose sounds that support the feeling</h3>
+            <p className="sound-reference-intro">A lead is the main tune your ear follows; a pad is a soft, sustained supporting sound. Use these as starting points, not rules.</p>
+            <div className="sound-reference-table-wrap">
+              <table className="sound-reference-table" role="table" aria-describedby="sound-reference-note">
+                <caption className="sr-only">Sound choices for a Velouria composition: suggested starting points, alternatives, and sounds that may distract.</caption>
+                <thead role="rowgroup">
+                  <tr role="row">
+                    <th scope="col" role="columnheader">Aspect</th>
+                    <th scope="col" role="columnheader">Primary choice</th>
+                    <th scope="col" role="columnheader">Alternative</th>
+                    <th scope="col" role="columnheader">Potential distraction</th>
+                  </tr>
+                </thead>
+                <tbody role="rowgroup">
+                  <tr role="row">
+                    <th scope="row" role="rowheader" data-label="Aspect">Pitched lead</th>
+                    <td role="cell" data-label="Try first">A soft felt piano or another rounded, gentle keyboard tone.</td>
+                    <td role="cell" data-label="Alternative">Muted electric piano or a clean, gently plucked synth.</td>
+                    <td role="cell" data-label="Watch for">A very bright piano, or a busy arpeggio (chord notes played one after another) that competes with the tune.</td>
+                  </tr>
+                  <tr role="row">
+                    <th scope="row" role="rowheader" data-label="Aspect">Pads &amp; strings</th>
+                    <td role="cell" data-label="Try first">Warm synth or soft strings that fade in slowly beneath the main notes.</td>
+                    <td role="cell" data-label="Alternative">Chamber strings with a gentle, unhurried start.</td>
+                    <td role="cell" data-label="Watch for">Harsh, bright synth sounds that take over the melody.</td>
+                  </tr>
+                  <tr role="row">
+                    <th scope="row" role="rowheader" data-label="Aspect">Percussion</th>
+                    <td role="cell" data-label="Try first">Begin without a beat; add a faint brushed-snare sweep only if the piece needs movement.</td>
+                    <td role="cell" data-label="Alternative">A very sparse, quiet low-drum pulse.</td>
+                    <td role="cell" data-label="Watch for">Heavy beats or busy high-hat ticks (small cymbals) that make the rhythm feel too strong.</td>
+                  </tr>
+                  <tr role="row">
+                    <th scope="row" role="rowheader" data-label="Aspect">Texture &amp; space</th>
+                    <td role="cell" data-label="Try first">A little echo, soft delay, or a subtle, softened copy of a note.</td>
+                    <td role="cell" data-label="Alternative">A subdued tape or orchestral loop behind the main musical part.</td>
+                    <td role="cell" data-label="Watch for">Echo so strong that the original sound disappears; it can blur the melody and chords if used everywhere.</td>
+                  </tr>
+                  <tr role="row">
+                    <th scope="row" role="rowheader" data-label="Aspect">Atmosphere</th>
+                    <td role="cell" data-label="Try first">Prefer a quiet binaural field recording (captured to preserve left-right and distance cues), such as distant rain or room tone. Its spatial detail can make the setting feel more realistic, especially on headphones.</td>
+                    <td role="cell" data-label="Alternative">A faint ventilation hum or soft wind recording.</td>
+                    <td role="cell" data-label="Watch for">Loud sound effects or prominent animal calls that become the main focus.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="sound-reference-note" id="sound-reference-note">A recording or loop can play a musical part, such as the Foundation chords or Sincere Fragment melody, or sit separately in the background as texture. For field recordings and a sense of place, continue to Layers.</p>
+          </section>
         </>}
         {tab === 4 && <>
           <Heading number="05" title="Layers">Build the composition from distinct parts. Foundation’s chords and the Sincere Fragment melody carry the main musical ideas; pads, recordings, and independent textures can add other layers. Add them one at a time, and decide whether each layer carries music or sits behind it as texture.</Heading>
           <Viz svg={mixMatrixSvg} label="diagram-layer-depth" />
-          <p className="beginner-intro" data-testid="layer-diagram-intro">This diagram shows parts at different listening distances, not an effects chain. Each instrument or recording has its own track; the piano is not routed through the strings or Dust.</p>
+          <p className="beginner-intro" data-testid="layer-diagram-intro">This diagram shows parts at different listening distances, not an effects chain. Each instrument or recording has its own track; adding a background sound does not automatically process the piano.</p>
           <div className="grid-two">
             <div className="surface" data-testid="layer-listening-roles"><div className="kicker">Listening roles</div><h3>Foreground → background</h3><p><b>Foreground:</b> the clearest musical idea, such as the melody or a chord played by piano or another source.</p><p><b>Mid-ground:</b> sustained parts, such as soft strings or a pad, that support the music without taking over.</p><p><b>Background:</b> a quieter recording, loop, or independent texture that adds depth behind the main parts.</p></div>
             <div className="surface" data-testid="layer-composition-prompt"><div className="kicker">Build by listening</div><h3>Add one layer at a time</h3><p>Start with Foundation’s chords and the Sincere Fragment melody. Together, these make a clear musical arrangement before you add extra layers.</p><p>Then bring in one soft pad, recording, or texture on its own track. A background layer can continue during the melody’s rests; lower or remove it if it hides the chords or melody.</p></div>

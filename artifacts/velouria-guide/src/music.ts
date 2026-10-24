@@ -196,7 +196,7 @@ export const mixMatrixSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 
 <text x="337" y="183" fill="#aab2b9" font-family="Figtree,sans-serif" font-size="11">slow swell · softened top · wide but quiet</text>
 <rect x="455" y="206" width="330" height="52" rx="12" fill="#8c78a4" fill-opacity=".16" stroke="#a28cb9" stroke-opacity=".7"/>
 <text x="477" y="229" fill="#e0d1ee" font-family="Figtree,sans-serif" font-size="15" font-weight="600">Texture · far edge</text>
-<text x="477" y="247" fill="#aab2b9" font-family="Figtree,sans-serif" font-size="11">Dust / tape loops / phrase-ending effects</text>
+<text x="477" y="247" fill="#aab2b9" font-family="Figtree,sans-serif" font-size="11">Field recordings · loops · soft effects</text>
 <rect x="222" y="267" width="556" height="38" rx="10" fill="#668178" fill-opacity=".14" stroke="#819a8d" stroke-opacity=".7"/>
 <text x="244" y="291" fill="#c8d9cf" font-family="Figtree,sans-serif" font-size="14" font-weight="600">Ambient texture · continuous, very low</text>
 </svg>`;
