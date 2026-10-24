@@ -12,6 +12,12 @@ const BASE = import.meta.env.BASE_URL;
 const heroImage = `${BASE}images/velouria-hero.webp`;
 const definitionImage = `${BASE}images/velouria-definition.webp`;
 const tabs = ['Foundation', 'Sincere Fragment', 'Transformations', 'Sound Design', 'Layers', 'Music to Study'];
+const progressionPhases = [
+  { name: 'ACHE', chords: 'i(add9)', bars: 'BARS 1–2' },
+  { name: 'CONSOLATION', chords: '♭VImaj7', bars: 'BARS 3–4' },
+  { name: 'MIRAGE', chords: '♭IImaj7', bars: 'BARS 5–6' },
+  { name: 'RETURN', chords: 'ivm9 / V7sus4', bars: 'BARS 7–8' },
+];
 
 function Heading({ number, title, children, headingId }: { number: string; title: string; children: string; headingId?: string }) {
   return <header className="section-heading"><span className="section-index">{number}</span><div><h2 id={headingId}>{title}</h2><p>{children}</p></div></header>;
@@ -62,11 +68,12 @@ function App() {
         <ul><li><strong>Velouric</strong> /vəˈlʊər.ɪk/ <em>adjective</em>: Exhibiting subtle qualities, traces, or underlying textures characteristic of Velouria (e.g., <em>a Velouric undertone in a downtempo track</em>).</li>
           <li><strong>Velourian</strong> /vəˈlʊər.i.ən/ <em>adjective &amp; noun</em>:<ol><li><em>adj.</em> Directly embodying the principles, instrumentation, and aesthetic of Velouria (e.g., <em>a Velourian piano arrangement</em>).</li><li><em>n.</em> A composer, producer, or listener dedicated to the genre.</li></ol></li></ul>
         <h3>Core Characteristics</h3>
-        <ul><li><strong>Harmonic Suspension:</strong> Progressions and dyadic intervals (such as repeating fourth-to-third sighs) that hover, question, or console without resolving into conventional pop or classical cadences.</li>
-          <li><strong>The Sincere Fragment:</strong> Short, evocative melodic motifs—often descending step-wise—that convey warmth or yearning rather than virtuosic complexity.</li>
-          <li><strong>Beautiful Unease:</strong> A compositional approach that brings harmonic suspension, a sincere melodic fragment, and variations through transformation together. The hovering harmony forms a foundation, the fragment carries a simple, expressive melody, and later variations reshape that melody while keeping it connected to its original idea.</li>
-          <li><strong>Mediated Distance:</strong> The use of degraded tape loops, granular residue, soft filtering, and room tone to give foreground instruments (such as felt piano or vintage polysynths) the impression of a half-remembered transmission.</li>
-          <li><strong>Environmental Setting:</strong> Subtle integration of field recordings, sub-bass drones, and quiet room acoustics that establish an ambiguous physical space beneath the music.</li></ul>
+        <p>Velouria is defined by four characteristics. <em>Beautiful Unease</em> describes one way to bring several of them together in a composition.</p>
+        <ul><li><strong>Harmonic Suspension:</strong> Progressions and dyadic intervals (such as repeating fourth-to-third sighs) that hover, question, or console without resolving into conventional pop or classical cadences. Explore this in <em>Foundation</em>.</li>
+          <li><strong>The Sincere Fragment:</strong> Short, evocative melodic motifs—often descending step-wise—that convey warmth or yearning rather than virtuosic complexity. Build one in <em>Sincere Fragment</em>, then reshape it in <em>Transformations</em>.</li>
+          <li><strong>Beautiful Unease (bringing the ideas together):</strong> A compositional approach that combines harmonic suspension, a sincere melodic fragment, and variations through transformation. The hovering harmony forms a foundation, the fragment carries a simple, expressive melody, and later variations reshape that melody while keeping it connected to its original idea. This is the composition built from the characteristics, not a fifth characteristic of Velouria.</li>
+          <li><strong>Mediated Distance:</strong> The use of degraded tape loops, granular residue, soft filtering, and room tone to give foreground instruments (such as felt piano or vintage polysynths) the impression of a half-remembered transmission. Explore this in <em>Sound Design</em>.</li>
+          <li><strong>Environmental Setting:</strong> Subtle integration of field recordings, sub-bass drones, and quiet room acoustics that establish an ambiguous physical space beneath the music. Explore this in <em>Layers</em>.</li></ul>
         <h3>Example in Context</h3><blockquote>“By pairing a soft Kawai piano motif with a distant, degraded synth swell and quiet window rain, the piece firmly establishes itself within <strong>Velouria</strong>.”</blockquote>
       </article>}
     </div>
@@ -81,8 +88,9 @@ function App() {
       </div>
       <p className="beginner-intro" id="key-help">The key sets which note the music treats as “home.” That home note is the <strong>tonal center</strong>. Changing this moves every example higher or lower while keeping its pattern. You can leave it on A♭ to start. The numbered modules are a suggested learning order; you do not need to read sheet music.</p>
       <aside className="note" aria-label="Companion app: Beautiful Unease" data-testid="beautiful-unease-reference">
-        <strong>Companion app: <a href="https://larslentz.github.io/beautiful_unease/" target="_blank" rel="noopener noreferrer">Beautiful Unease</a>.</strong> It creates melodies and harmonies that you can use as starting material for Velouria-type music. A melody is a sequence of notes; harmony is the supporting notes played together. Try using a short passage from a Beautiful Unease melody as your Sincere Fragment, or its harmonies as an alternative to Foundation’s example chords. Keep the melody and backing in the same key, leave space between phrases, then explore Transformations, Sound Design, and Environment to shape the piece.
+        <strong>Companion app: <a href="https://larslentz.github.io/beautiful_unease/" target="_blank" rel="noopener noreferrer">Beautiful Unease</a>.</strong> It creates melodies and harmonies that you can use as starting material for Velouria-type music. A melody is a sequence of notes; harmony is the supporting notes played together. Try using a short passage from a Beautiful Unease melody as your Sincere Fragment, or its harmonies as an alternative to Foundation’s example chords. Keep the melody and backing in the same key, leave space between phrases, then explore Transformations, Sound Design, and Layers to shape the piece.
       </aside>
+      <p className="beginner-intro" data-testid="characteristic-learning-map"><strong>How the four characteristics appear in this guide:</strong> Foundation explores Harmonic Suspension; Sincere Fragment and Transformations develop the melody; Sound Design explores Mediated Distance; and Layers explores Environmental Setting.</p>
       <div className="module-navigation">
         <div className="module-navigation-track">
           <div className="module-family-row">
@@ -99,7 +107,7 @@ function App() {
       </div>
       <section className="tab-content" role="tabpanel" id={`panel-${tab}`} aria-labelledby={`tab-${tab}`} key={`${tab}-${key}`} data-testid={`content-module-${tab + 1}`}>
         {tab === 0 && <>
-          <Heading number="01" title="Start with two notes">Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. This small downward movement makes the gentle “sigh” used throughout the guide. Two notes played together are called a dyad.</Heading>
+          <Heading number="01" title="Start with two notes">These two-note sighs show Harmonic Suspension in miniature: a small change that eases some tension without making the whole piece feel finished. Play two notes together, keep the lower one held, and move the upper one to the very next piano key on its left. Two notes played together are called a dyad.</Heading>
           <div className="note" data-testid="foundation-exercise-role"><strong>Start with this as a short practice exercise, not a pattern you must play throughout the piece.</strong> Repeat the two bars a few times by themselves. Later in this tab, the eight-bar chord sequence becomes your accompaniment, with the Sincere Fragment melody played above it. <a href="#arrangement-plan">See the complete playing order and bar-by-bar plan below.</a></div>
           <details className="learning-note" data-testid="foundation-interval-explanation">
             <summary>The music theory behind the sigh</summary>
@@ -132,9 +140,12 @@ function App() {
           <PianoRoll events={dyadEvents} bars={2} title={`Two gentle sighs · one in each bar · ${key} minor`} testId="diagram-dyad-piano-roll" />
           <h3>Next: turn the idea into an eight-bar chord sequence</h3>
           <p className="beginner-intro">A <strong>chord</strong> is a group of notes played together. A <strong>progression</strong> is a sequence of chords. For the suggested arrangement, use this sequence <strong>instead of continuously repeating the two-bar sigh exercise</strong>. Play each vertical stack together and hold it for the length of its blocks. The first three chords each last two bars; the final two each last one bar.</p>
-          <div className="chord-ribbon" aria-label="Eight-bar chord progression" data-testid="progression-chord-ribbon">
-            {['i(add9)', '♭VImaj7', '♭IImaj7', 'ivm9 / V7sus4'].map((chord, i) => <div className="chord-step" key={chord}><strong>{chord}</strong><span>{['BARS 1–2', 'BARS 3–4', 'BARS 5–6', 'BARS 7–8'][i]}</span></div>).flatMap((el, i) => i < 3 ? [el, <span className="arrow" key={`arrow-${i}`} aria-hidden="true">→</span>] : [el])}
+          <div className="chord-ribbon" aria-label="Eight-bar chord progression with suggested emotional phases" data-testid="progression-chord-ribbon">
+            {progressionPhases.map((phase, i) => <div className="chord-step" key={phase.name} data-testid={`progression-phase-${i + 1}`}>
+              <div className="stat-label">{phase.name}</div><strong>{phase.chords}</strong><span>{phase.bars}</span>
+            </div>).flatMap((el, i) => i < 3 ? [el, <span className="arrow" key={`arrow-${i}`} aria-hidden="true">→</span>] : [el])}
           </div>
+          <div className="note" data-testid="note-progression-phases"><strong>These are mood cues, not rules.</strong> Ache begins with an open minor chord; Consolation brings a warmer major sound; Mirage shifts to a less expected chord; Return moves through a familiar minor color and ends on an open, suspended chord. The final chord does not strongly resolve to “home,” so the loop can begin again or the sound can be left hanging.</div>
           <details className="learning-note" data-testid="foundation-chord-symbol-help">
             <summary>What do those chord symbols mean?</summary>
             <p>Roman numerals identify a chord’s starting note relative to “home.” Lowercase means minor; uppercase means major. ♭ means the starting note is lowered by one semitone.</p>
@@ -149,11 +160,12 @@ function App() {
           </details>
           <PianoRoll events={progressionEvents} bars={8} title={`Eight-bar chord sequence · ${key} minor`} testId="diagram-eight-bar-progression" />
           <div className="note" data-testid="note-progression-ending">In bar 7, play the notes of <b>ivm9</b> together. In bar 8, switch to <b>V7sus4</b>. To continue, return to bar 1 after bar 8. To finish instead, stop on that open sound and let it fade; this can leave an unfinished feeling.</div>
+          <div className="note" data-testid="note-pedal-point"><strong>Optional: add a held bass note.</strong> Try holding the low home note, {pitchName(root - 12)}, quietly underneath all eight bars while the higher chords change. Musicians call this a <em>pedal point</em>: one steady note that helps the changing harmony keep a sense of home. It is an extra layer, not a note in the chord roll; leave it out if it muddies the chords.</div>
           <div className="note" data-testid="foundation-recorded-sources"><strong>The backing does not have to be piano.</strong> A recording of sustained orchestral strings, or a tape loop (a recorded passage that repeats), can carry Foundation’s chords instead. Choose recordings whose notes match each chord in the roll, and arrange the clips for the shown lengths: two bars for each of the first three chords, then one bar for each of the last two. Use short fades at edits to avoid clicks. This recording is the accompaniment itself, not an extra atmosphere layer; one unchanged chord loop would not reproduce this whole sequence.</div>
           <ArrangementGuide tonalKey={key} />
         </>}
         {tab === 1 && <>
-          <Heading number="02" title="The sincere fragment">A melody is a sequence of single notes; a motif is a short, recognizable pattern within it. Start with just three notes, each a little lower than the last. Leave silence afterward instead of adding more notes.</Heading>
+          <Heading number="02" title="The sincere fragment">A melody is a sequence of single notes; a motif is a short, recognizable pattern within it. This three-note descent is the Sincere Fragment: simple, unhurried, and expressive. Its quiet bars are intentional breathing room, not missing notes. On a later repeat, try the optional Late Breath transformation: delay the melody by half a beat while Foundation keeps its steady timing.</Heading>
           <div className="learning-note" data-testid="melody-accompaniment-guidance">
             <h3>When does this melody come in?</h3>
             <p><strong>Play it over Foundation’s eight-bar chord sequence, not after the chords stop.</strong> For a simple start, play the chords alone for eight bars. Then restart the chord sequence and begin this melody at the same instant: beat 1 of the new cycle (bar 9 of the piece).</p>
@@ -173,7 +185,7 @@ function App() {
           <div className="note" data-testid="melody-recorded-sources"><strong>A recorded phrase can be the sincere fragment.</strong> Instead of playing piano, use a short cello, violin, other orchestral, or tape-recorded phrase. To follow this example, select or edit recorded notes to match the three descending pitches and timing in the roll. Place them in bars 1–2 and 7–8, leaving bars 3–6 without new melody notes. Because the recording carries the recognizable melody, it is the fragment itself—not just background texture.</div>
         </>}
         {tab === 2 && <>
-          <Heading number="03" title="Variations & transformations">A variation changes one part of an existing idea. Try moving the melody’s start time, playing it higher or lower, or holding a note longer. Choose an example below and compare its note list with the original three-note melody.</Heading>
+          <Heading number="03" title="Variations & transformations">Transformations let the Sincere Fragment change while remaining recognizable. Keep Foundation’s eight-bar harmony underneath, then try moving the melody’s start time, playing it higher or lower, or holding a note longer. Choose one example below and compare its note list with the original three-note melody.</Heading>
           <div className="note" data-testid="variation-arrangement-guidance">
             <p><strong>Start by playing Foundation and Sincere Fragment together.</strong> Use Foundation’s <strong>eight-bar chord sequence</strong> as the accompaniment (the backing), with the <strong>Sincere Fragment melody</strong> above it. Both parts start at bar 1 of the same eight-bar cycle. The chords continue while the melody rests in bars 3–6, and the melody returns in bars 7–8. After bar 8, return both parts to bar 1 and repeat. That complete eight-bar pattern is the <strong>accompaniment-and-melody loop</strong>; it does not mean repeating Foundation’s two-bar sigh exercise.</p>
             <p>Once that combined pattern feels comfortable, choose <strong>one variation for a later eight-bar repeat</strong>, rather than stacking all eight examples at once. The rolls show the changed notes; they are not eight new sections you must perform in order. Keep Foundation’s chord sequence running beneath the melody; Drone Pedal also adds a quiet, held bass layer.</p>
@@ -186,7 +198,7 @@ function App() {
           <div className="grid-two">{VARIATIONS.map(v => <article className="variation-card" key={v.kind} data-testid={`card-transformation-${v.kind}`}><strong>{v.name}</strong><span>{v.summary}</span></article>)}</div>
         </>}
         {tab === 3 && <>
-          <Heading number="04" title="Mediated distance & sound design">Sound design means shaping a sound’s tone. Keep one clear musical part close to the listener—a piano or recorded orchestral phrase, for example—then add softer, slower sounds behind it. “Mediated distance” means making those background sounds feel filtered or half-remembered, rather than simply louder or quieter.</Heading>
+          <Heading number="04" title="Mediated distance & sound design">Sound design means shaping a sound’s tone. Keep one clear musical part close to the listener—a piano or recorded orchestral phrase, for example—then add a softer, altered version or another slow sound behind it. “Mediated distance” means making that layer feel filtered or half-remembered, not simply louder or quieter.</Heading>
           <div className="note">These are sound choices for the parts you are already playing, not a separate section that starts after the melody. Add quiet layers gradually once the chord-and-melody pattern is clear. Pads and fading effects can continue through the melody’s empty bars.</div>
           <div className="grid-two">
             <div className="surface" data-testid="recipe-piano"><div className="kicker">Piano layer</div><h3>Soft felt tone</h3><p>Choose a felt piano, muted grand, or a softened sampled instrument (for example, Pianoteq or a Kawai felt-style patch).</p><ul><li>Velocity: 40–60. Velocity is how firmly a MIDI note is played, on a 1–127 scale.</li><li>Choose a close microphone sound for intimate detail.</li><li>Use dark reverb: a soft room-like echo. Avoid a sharp, bright initial hit (the transient).</li></ul></div>
@@ -198,9 +210,14 @@ function App() {
               <p>Examples to try include u-he Colour Copy, SoundBetter Halo Effect, and SoundBetter Butterfly Effect. Experiment with one at a time, compare it with the unprocessed sound, and adjust or remove it if it distracts from the music. A send routes some of a part to a separate effects track so you can blend its effect back in.</p>
               <p>One approach is to briefly increase an effect send on the ending of a melodic phrase, then lower it so the effect fades before the next idea. You can also apply an effect across more of the phrase, or to a whole layer, if that better suits the piece. Keep the original musical idea recognizable.</p>
             </div>
-            <div className="surface" data-testid="recipe-bass"><div className="kicker">Bass layer</div><h3>A soft low foundation</h3><p>Use a rounded sine or triangle synthesizer tone: a simple, smooth sound rather than a bright or buzzy one.</p><ul><li>Try a low-pass filter with its cutoff around 300–500 Hz to reduce higher frequencies.</li><li>Sustain means holding the note. Keep it long and even.</li><li>Let the sound start softly and stay quiet, supporting the higher notes rather than creating a beat.</li></ul></div>
+            <div className="surface" data-testid="recipe-bass"><div className="kicker">Bass layer</div><h3>A soft low foundation</h3><p>Use a rounded sine or triangle synthesizer tone: a simple, smooth sound rather than a bright or buzzy one.</p><ul><li>Try a low-pass filter with its cutoff near or below 300 Hz to keep the sound low and reduce higher frequencies.</li><li>Sustain means holding the note. Keep it long and even.</li><li>Let the sound start softly and stay quiet, supporting the higher notes rather than creating a beat.</li></ul></div>
           </div>
-          <div className="note" data-testid="note-depth-arrangement">Depth is an arrangement decision as much as an effects decision: keep one close, legible source while the softer layers lose definition behind it.</div>
+          <section className="learning-note" data-testid="mediated-distance-practice">
+            <h3>One clear part, one softened reflection</h3>
+            <p>Try this optional experiment with a piano phrase or recording: keep the original close and clear, then put a copy on a separate track and turn it down. Make the copy darker by reducing some high frequencies, and add a little room-like echo if it helps. The first version stays easy to hear; the softer copy can feel like the same idea remembered from farther away.</p>
+            <p>Compare the original alone with both versions playing. Keep the copy subtle, or remove it if it blurs the melody. You can create distance with a separate pad or recording instead; there is no need to process every sound.</p>
+          </section>
+          <div className="note" data-testid="note-depth-arrangement">Depth is an arrangement decision as much as an effects decision: keep one close, legible source while the softer layers lose definition behind it. Try echo or granular processing on one short phrase or fading note first, rather than washing the whole mix; phrase endings are one option, not the only one.</div>
         </>}
         {tab === 4 && <>
           <Heading number="05" title="Layers">Build the composition from distinct parts. Foundation’s chords and the Sincere Fragment melody carry the main musical ideas; pads, recordings, and independent textures can add other layers. Add them one at a time, and decide whether each layer carries music or sits behind it as texture.</Heading>
@@ -225,6 +242,12 @@ function App() {
                 <li><strong>Listen through the whole cycle.</strong> A recording can continue through the melody’s rests in bars 3–6. Adjust its level or timing if it masks the chords, melody, or the quiet between phrases.</li>
               </ol>
               <p>Try muting and unmuting the recording to compare the piece with and without it. Keep it only if it adds the feeling of space or place you want.</p>
+              <p><strong>Set the listening distance.</strong> Keep the felt piano or main melody clear and close; make the field recording quieter and softer behind it. A little room sound or gentle stereo width can help it suggest a surrounding place without taking attention from the notes.</p>
+            </section>
+            <section className="learning-note" aria-labelledby="environment-low-floor-title" data-testid="environment-low-floor">
+              <h3 id="environment-low-floor-title">Optional: a quiet physical floor</h3>
+              <p>A sub-bass is a very low, sustained note. A soft note below the changing chords can make the arrangement feel grounded, like a floor beneath the other sounds, without adding a beat.</p>
+              <p>Try the low home note described in Foundation, keep it barely audible, and compare the piece with and without it. The Bass layer in Sound Design has a suggested low-pass setting. Skip this layer if it makes the harmony muddy or if you prefer a lighter sound.</p>
             </section>
             <div className="note" data-testid="note-environment">The aim is an ambiguous location, not a sound-effects scene. A trace of air, rain, or distant machinery can make silence feel inhabited.</div>
           </section>
