@@ -48,7 +48,10 @@ function App() {
           <h1 id="brand-title">Velouria</h1>
           <div className="pronunciation">Ve·lou·ri·a /vəˈlʊər.i.ə/ · noun</div>
         </div>
-        <div className="dict-label">THE COMPOSITIONAL GUIDE</div>
+        <div className="hero-credit">
+          <div className="dict-label">BY LARS LENTZ</div>
+          <a className="hero-credit-link" href="https://sleek.bio/larslentz" target="_blank" rel="noopener noreferrer">More by Lars</a>
+        </div>
       </div>
       <p className="hero-definition">A genre of romantic, cinematic ambient and chamber-inspired electronic music characterized by tender melodic fragments, suspended harmonic movement, and textures softened by distance, memory, or environmental space, often evoking a feeling described as "<a href="https://larslentz.github.io/beautiful_unease/" target="_blank" rel="noopener noreferrer">beautiful unease</a>."</p>
       <div className="dictionary-meta">
