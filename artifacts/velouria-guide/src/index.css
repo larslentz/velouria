@@ -100,8 +100,22 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
 .listening-reset { padding:9px 12px; border:1px solid #53606b; background:transparent; color:#d9d5c8; cursor:pointer; }
 .listening-reset:hover:not(:disabled) { border-color:var(--gold); color:var(--gold-bright); }
 .listening-reset:disabled { opacity:.48; cursor:not-allowed; }
-.listening-gut-check { margin:26px 0 0; padding:18px 20px; border-left:2px solid var(--gold); background:rgba(12,17,22,.38); }
-.listening-gut-check p { margin:8px 0 0; color:#ded7c7; font-size:15px; line-height:1.7; font-style:italic; }
+.listening-gut-check { margin:26px 0 0; padding:22px; border-left:2px solid var(--gold); background:rgba(12,17,22,.38); }
+.listening-gut-check h4 { margin:7px 0 0; color:var(--gold-bright); font-size:21px; font-weight:500; }
+.listening-gut-check .velouric-gut-question { margin:12px 0 16px; color:#eee6d2; font-size:18px; line-height:1.65; font-style:italic; }
+.velouric-duality,.velouric-truth-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.velouric-duality p,.velouric-truth-grid>div { margin:0; padding:14px 16px; border:1px solid #39434d; background:rgba(12,17,22,.36); color:#b7c0c4; font-size:14px; line-height:1.65; }
+.velouric-duality strong,.velouric-truth-grid strong { color:#e4d6b4; font-weight:500; }
+.velouric-two-truths,.velouric-boundaries { margin-top:23px; }
+.velouric-two-truths h5,.velouric-boundaries h5 { margin:0 0 8px; color:#e8e2d5; font-size:16px; font-weight:500; }
+.velouric-two-truths>p { margin:0 0 12px; color:#aeb7bc; font-size:14px; line-height:1.6; }
+.velouric-truth-grid>div p { margin:5px 0 0; }
+.velouric-boundary-table { table-layout:auto; }
+.velouric-boundary-table thead th:first-child { width:34%; }
+.velouric-boundary-table thead th:nth-child(2) { width:20%; }
+.velouric-boundary-table tbody th[scope="row"] { color:#d5c69d; }
+.velouric-boundary-table tbody td:nth-child(1) { color:#ead7a8; font-weight:500; }
+.velouric-boundaries .sound-reference-table-wrap { margin-top:12px; }
 .environment-setting-section { margin-top:38px; padding-top:26px; border-top:1px solid #39434d; }
 @keyframes reveal { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 .section-heading { display:grid; grid-template-columns:62px minmax(0,1fr); gap:18px; margin-bottom:27px; }
@@ -212,6 +226,8 @@ button:focus-visible,select:focus-visible,a:focus-visible { outline: 2px solid v
  .listening-criterion { grid-template-columns:1fr; gap:13px; }
  .listening-result { grid-template-columns:1fr; gap:13px; }
  .listening-reset { justify-self:start; }
+ .velouric-duality,.velouric-truth-grid { grid-template-columns:1fr; }
+ .listening-gut-check { padding:18px; }
  .chord-glossary>div { grid-template-columns:1fr; gap:3px; }
   .sound-reference { padding:18px; }
   .sound-reference-table,.sound-reference-table tbody { display:block; width:100%; }

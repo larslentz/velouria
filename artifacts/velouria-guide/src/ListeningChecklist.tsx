@@ -122,10 +122,41 @@ export function ListeningChecklist() {
         <button className="listening-reset" type="button" onClick={() => setScores({})} disabled={ratedCount === 0}>Reset scores</button>
       </div>
 
-      <blockquote className="listening-gut-check">
-        <span className="kicker">The one-sentence gut check</span>
-        <p>Does this track make you feel like you are sitting in a quiet, dimly lit room at night, overhearing a tender, fragile piano and string melody drifting through an open window from an ambiguous past?</p>
-      </blockquote>
+      <section className="listening-gut-check" aria-labelledby="velouric-gut-check-title">
+        <span className="kicker">A quick listening guide</span>
+        <h4 id="velouric-gut-check-title">The Velouric Gut Check</h4>
+        <p className="velouric-gut-question">“Does this track pair an intimate, sincere emotional warmth with a sense of distance, suspension, or quiet unease?”</p>
+        <div className="velouric-duality">
+          <p><strong>Yes: Velouric identity.</strong> The track carries a Velouric quality, either fully embodied or present as an underlying influence.</p>
+          <p><strong>No: Non-Velouric.</strong> It may be purely functional or upbeat, emotionally sterile or clinical, or dominated by a conventional groove and resolution.</p>
+        </div>
+
+        <section className="velouric-two-truths" aria-labelledby="two-truths-title">
+          <h5 id="two-truths-title">The essential two-truths rule</h5>
+          <p>A track is Velouric when both of these qualities are present:</p>
+          <div className="velouric-truth-grid">
+            <div><strong>Emotional truth</strong><p>It feels genuinely tender, vulnerable, or nostalgic—not emotionally detached or aggressive.</p></div>
+            <div><strong>Textural / structural truth</strong><p>The sound feels softened by distance, time, or environment, while the musical phrases hover rather than resolve into tidy pop or classical endings.</p></div>
+          </div>
+        </section>
+
+        <section className="velouric-boundaries" aria-labelledby="boundary-examples-title">
+          <h5 id="boundary-examples-title">Quick boundary examples</h5>
+          <div className="sound-reference-table-wrap">
+            <table className="sound-reference-table velouric-boundary-table">
+              <caption className="sr-only">Examples of Velouric, Velouric Influence, and Non-Velouric musical qualities</caption>
+              <thead><tr><th scope="col">Track characteristic</th><th scope="col">Classification</th><th scope="col">Why</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Intimate melody + suspended chords + weathered or room space</th><td data-label="Classification">Velouric</td><td data-label="Why">Embodies the core tension between warmth and distance.</td></tr>
+                <tr><th scope="row">Warm piano or strings, but with a driving pop beat or steady groove</th><td data-label="Classification">Velouric Influence</td><td data-label="Why">Retains harmonic or melodic warmth, but shifts into a rhythm-driven genre.</td></tr>
+                <tr><th scope="row">Dark drones, heavy industrial noise, or pure horror dissonance</th><td data-label="Classification">Non-Velouric</td><td data-label="Why">Lacks sincere emotional tenderness and the consoling quality of a sigh or warm landing.</td></tr>
+                <tr><th scope="row">Pristine, clean modern production with functional cadences</th><td data-label="Classification">Non-Velouric</td><td data-label="Why">Lacks mediated distance, harmonic suspension, and underlying unease.</td></tr>
+                <tr><th scope="row">Upbeat, bright, or energetically paced music</th><td data-label="Classification">Non-Velouric</td><td data-label="Why">Contrasts with Velouria’s slow, unhurried, reflective pacing.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
     </section>
   );
 }
