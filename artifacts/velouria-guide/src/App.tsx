@@ -7,6 +7,7 @@ import { PianoRoll } from './PianoRoll';
 import { ArrangementGuide } from './ArrangementGuide';
 import { CombinedArrangementPlayer } from './CombinedArrangementPlayer';
 import { LayerExamples } from './EnvironmentTextures';
+import { ListeningChecklist } from './ListeningChecklist';
 
 const BASE = import.meta.env.BASE_URL;
 const heroImage = `${BASE}images/velouria-hero.webp`;
@@ -353,6 +354,7 @@ function App() {
               <p className="music-study-link"><a href="https://youtube.com/playlist?list=PLEv8rUxoqBOU&amp;si=nNRT2AAPx3vDZHCN" target="_blank" rel="noopener noreferrer">Open the Velouria playlist on YouTube</a> if you prefer listening there.</p>
             </div>
           </article>
+          <ListeningChecklist />
         </>}
       </section>
       <footer className="footer">A COMPOSITION HANDBOOK · FELT-STYLE PIANO PREVIEWS + MIDI DOWNLOADS · USE THE DIAGRAMS AS WRITING PROMPTS · ARTWORK BY LARS LENTZ</footer>
